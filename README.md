@@ -1,5 +1,5 @@
-<h1>QuickBites</h1>
-<p>QuickBites is a modern e-commerce web application tailored for the food industry. The platform allows users to place food orders, chefs to manage kitchen stock, hotel owners to oversee operations, and admins to manage users and restaurants. The project is built with a focus on role-based dashboards, real-time notifications, and seamless payment integrations.</p>
+<h1>Eat & Love</h1>
+<p>Eat & Love is a modern e-commerce web application tailored for the food industry. The platform allows users to place food orders, chefs to manage kitchen stock, hotel owners to oversee operations, and admins to manage users and restaurants. The project is built with a focus on role-based dashboards, real-time notifications, and seamless payment integrations.</p>
 
 <h2>Features</h2>
 
