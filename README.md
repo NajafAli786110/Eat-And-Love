@@ -1,0 +1,2 @@
+# QuickBites
+ QuickBites is a full-fledged e-commerce web application designed to allow users to order food online, chefs to manage stock and attendance, hotel owners to oversee menus and orders, and admins to manage kitchens and users. The project serves as a comprehensive platform for various stakeholders in the food delivery ecosystem, streamlining operations and enhancing user experience with real-time functionalities, role-based dashboards, and secure payment integrations.
