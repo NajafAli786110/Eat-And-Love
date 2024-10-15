@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Homepage() {
   return (
-    <div>Coming from Homepage</div>
+    <h1>Coming from Homepage</h1>
   )
 }
