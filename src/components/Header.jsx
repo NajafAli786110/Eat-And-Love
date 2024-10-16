@@ -70,7 +70,7 @@ const Header = () => {
                       width: { xs: "150px", md: "220px" },
                       height: "auto",
                     }}
-                    src="/src/assets/logo.png"
+                    src="../src/assets/logo.png"
                     alt="Eat & Love"
                   />
                 </Link>
