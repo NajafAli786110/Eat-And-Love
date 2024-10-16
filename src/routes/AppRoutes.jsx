@@ -16,7 +16,7 @@ import {
 } from "../Dashboard";
 import { Footer, Header } from "../components";
 
-export const AppRoutes = () => {
+const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Header />
@@ -37,3 +37,5 @@ export const AppRoutes = () => {
     </BrowserRouter>
   );
 };
+
+export default AppRoutes;
