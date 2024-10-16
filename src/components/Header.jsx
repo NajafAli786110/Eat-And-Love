@@ -25,7 +25,7 @@ const pages = [
     link: "/menu",
   },
   {
-    name: "Our Location",
+    name: "Our Locations",
     link: "/location",
   },
   {
