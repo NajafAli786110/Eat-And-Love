@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { Search, ShoppingCart, Login, Menu } from "@mui/icons-material";
 import MobileMenuPopup from "./MobileMenuPopup";
+import SearchBarPopup from "./SearchBarPopup";
 
 // Demo Data
 const pages = [
@@ -40,168 +41,176 @@ const pages = [
 
 const Header = () => {
   const [mblMenuOpen, setMblMenuOpen] = React.useState(false);
+  const [isOpenSearch, setIsOpenSearch] = React.useState(false);
   return (
-    <Box>
-      {mblMenuOpen ? (
-        <MobileMenuPopup pages={pages} setMblMenuOpen={setMblMenuOpen} />
-      ) : (
-        <AppBar
-          position="static"
-          sx={{
-            backgroundColor: "transparent",
-            boxShadow: "0px 0px 5px #00000025",
-          }}
-        >
-          <Container maxWidth="xl">
-            <Toolbar disableGutters>
-              {/* Dekstop Menu */}
+    <>
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: "transparent",
+          boxShadow: "0px 0px 5px #00000025",
+        }}
+      >
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            {/* Dekstop Menu */}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <Link to="/">
+                <Box
+                  component="img"
+                  sx={{
+                    width: { xs: "150px", md: "220px" },
+                    height: "auto",
+                  }}
+                  src="../src/assets/logo.png"
+                  alt="Eat & Love"
+                />
+              </Link>
+
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "end",
                   alignItems: "center",
-                  width: "100%",
+                  gap: "20px",
                 }}
               >
-                <Link to="/">
-                  <Box
-                    component="img"
-                    sx={{
-                      width: { xs: "150px", md: "220px" },
-                      height: "auto",
-                    }}
-                    src="../src/assets/logo.png"
-                    alt="Eat & Love"
-                  />
-                </Link>
-
+                {/* Navigation List */}
+                <List
+                  sx={{
+                    display: { xs: "none", md: "flex" },
+                    gap: "16px",
+                    ml: "-8rem",
+                  }}
+                >
+                  {pages.map((item) => (
+                    <ListItem
+                      key={item.link}
+                      sx={{ width: "auto", padding: 0 }}
+                    >
+                      <Link
+                        to={item.link}
+                        style={{
+                          textDecoration: "none",
+                          color: "var(--primary-color)",
+                        }}
+                      >
+                        <ListItemText
+                          primary={item.name}
+                          primaryTypographyProps={{
+                            sx: {
+                              fontSize: "12px",
+                              textTransform: "uppercase",
+                              color: "var(--primary-color)",
+                            },
+                          }}
+                        />
+                      </Link>
+                    </ListItem>
+                  ))}
+                </List>
                 <Box
                   sx={{
                     display: "flex",
-                    justifyContent: "end",
+                    gap: "8px",
                     alignItems: "center",
-                    gap: "20px",
                   }}
                 >
-                  {/* Navigation List */}
-                  <List
+                  {/* Search Icon */}
+                  <Button
+                    onClick={() => setIsOpenSearch(true)}
                     sx={{
-                      display: { xs: "none", md: "flex" },
-                      gap: "16px",
-                      ml: "-8rem",
+                      minWidth: { xs: "18px", sm: "25px" },
                     }}
                   >
-                    {pages.map((item) => (
-                      <ListItem
-                        key={item.link}
-                        sx={{ width: "auto", padding: 0 }}
-                      >
-                        <Link
-                          to={item.link}
-                          style={{
-                            textDecoration: "none",
-                            color: "var(--primary-color)",
-                          }}
-                        >
-                          <ListItemText
-                            primary={item.name}
-                            primaryTypographyProps={{
-                              sx: {
-                                fontSize: "12px",
-                                textTransform: "uppercase",
-                                color: "var(--primary-color)",
-                              },
-                            }}
-                          />
-                        </Link>
-                      </ListItem>
-                    ))}
-                  </List>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      gap: "8px",
-                      alignItems: "center",
-                    }}
-                  >
-                    {/* Search Icon */}
                     <Search
                       sx={{
                         color: "var(--font-color)",
                         fontSize: { xs: "18px", sm: "25px" },
                       }}
                     />
+                  </Button>
 
-                    {/* Cart Icon */}
-                    <Box
-                      sx={{
-                        position: "relative",
-                        mb: "-5px",
-                      }}
-                    >
-                      <ShoppingCart
-                        sx={{
-                          color: "var(--font-color)",
-                          fontSize: { xs: "18px", sm: "25px" },
-                          zIndex: "2",
-                        }}
-                      />
-                      <Typography
-                        variant="p"
-                        sx={{
-                          fontSize: { xs: "6px", md: "8px" },
-                          padding: { xs: "2px 5px", md: "2px 6px" },
-                          backgroundColor: "var(--secondary-color)",
-                          color: "var(--white-full)",
-                          borderRadius: "100px",
-                          position: "absolute",
-                          top: -10,
-                          right: -5,
-                        }}
-                      >
-                        2
-                      </Typography>
-                    </Box>
-
-                    {/* Menu Bar For Phone */}
-                    <Button
-                      sx={{
-                        color: "var(--font-color)",
-                        padding: 0,
-                        margin: 0,
-                        minWidth: "20px",
-                        display: { xs: "flex", md: "none" },
-                      }}
-                      onClick={() => setMblMenuOpen(true)}
-                    >
-                      <Menu
-                        sx={{
-                          color: "var(--font-color)",
-                          fontSize: "18px",
-                          zIndex: "10",
-                        }}
-                      />
-                    </Button>
-                  </Box>
-                  <Button
-                    variant="contained"
-                    startIcon={<Login />}
+                  {/* Cart Icon */}
+                  <Box
                     sx={{
-                      backgroundColor: "var(--secondary-color)",
-                      borderRadius: "20px",
-                      textTransform: "capitalize",
-                      display: { xs: "none", sm: "flex" },
+                      position: "relative",
+                      mb: "-5px",
                     }}
                   >
-                    Login
+                    <ShoppingCart
+                      sx={{
+                        color: "var(--font-color)",
+                        fontSize: { xs: "18px", sm: "25px" },
+                        zIndex: "2",
+                      }}
+                    />
+                    <Typography
+                      variant="p"
+                      sx={{
+                        fontSize: { xs: "6px", md: "8px" },
+                        padding: { xs: "2px 5px", md: "2px 6px" },
+                        backgroundColor: "var(--secondary-color)",
+                        color: "var(--white-full)",
+                        borderRadius: "100px",
+                        position: "absolute",
+                        top: -10,
+                        right: -5,
+                      }}
+                    >
+                      2
+                    </Typography>
+                  </Box>
+
+                  {/* Menu Bar For Phone */}
+                  <Button
+                    sx={{
+                      color: "var(--font-color)",
+                      padding: 0,
+                      margin: 0,
+                      minWidth: "20px",
+                      display: { xs: "flex", md: "none" },
+                    }}
+                    onClick={() => setMblMenuOpen(true)}
+                  >
+                    <Menu
+                      sx={{
+                        color: "var(--font-color)",
+                        fontSize: "18px",
+                        zIndex: "10",
+                      }}
+                    />
                   </Button>
                 </Box>
+                <Button
+                  variant="contained"
+                  startIcon={<Login />}
+                  sx={{
+                    backgroundColor: "var(--secondary-color)",
+                    borderRadius: "20px",
+                    textTransform: "capitalize",
+                    display: { xs: "none", sm: "flex" },
+                  }}
+                >
+                  Login
+                </Button>
               </Box>
-            </Toolbar>
-          </Container>
-        </AppBar>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      {isOpenSearch && <SearchBarPopup setIsOpenSearch={setIsOpenSearch} />}
+      {mblMenuOpen && (
+        <MobileMenuPopup pages={pages} setMblMenuOpen={setMblMenuOpen} />
       )}
-    </Box>
+    </>
   );
 };
 
