@@ -71,6 +71,7 @@ const SearchBarPopup = ({ setIsOpenSearch }) => {
             isClosing ? slideInFromDown : slideInFromUp
           } 0.3s ease-in-out`,
           backgroundColor: "var(--light-grey)",
+          zIndex: '999',
         }}
       >
         {/* Search Bar */}
