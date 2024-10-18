@@ -14,6 +14,7 @@ import {
 import { Search, ShoppingCart, Login, Menu } from "@mui/icons-material";
 import MobileMenuPopup from "./MobileMenuPopup";
 import SearchBarPopup from "./SearchBarPopup";
+import HeaderLogo from "../assets/logo.png";
 
 // Demo Data
 const pages = [
@@ -69,7 +70,7 @@ const Header = () => {
                     width: { xs: "150px", md: "220px" },
                     height: "auto",
                   }}
-                  src="../src/assets/logo.png"
+                  src={HeaderLogo}
                   alt="Eat & Love"
                 />
               </Link>
