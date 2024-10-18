@@ -126,7 +126,7 @@ const HeroSection = () => {
             }}
           >
             <img
-              src="/src/assets/Hero Left.png"
+              src="/assets/Hero Left.png"
               alt="Fast Food Promo"
               style={{
                 width: "100%",
