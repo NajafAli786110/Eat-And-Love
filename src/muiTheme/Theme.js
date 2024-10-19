@@ -14,7 +14,7 @@ const Theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Poppins, sans-serif",
+    fontFamily: "Poppins, Ahsing, sans-serif",
     h1: {
       fontFamily: "Ahsing, sans-serif",
       fontSize: "2.5rem",
@@ -31,6 +31,7 @@ const Theme = createTheme({
       textTransform: "capitalize",
       fontSize: "1rem",
     },
+
   },
 });
 

@@ -55,13 +55,13 @@ const SearchBarPopup = ({ setIsOpenSearch }) => {
     <>
       <Box
         sx={{
-          height: "80vh",
-          width: "100vw",
+          height: {xs: "100vh", md: "80vh"},
+          width: "100%",
           padding: "30px 0px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: '32px',
+          gap: "32px",
           justifyContent: "start",
           position: "fixed",
           top: 0,
@@ -71,16 +71,16 @@ const SearchBarPopup = ({ setIsOpenSearch }) => {
             isClosing ? slideInFromDown : slideInFromUp
           } 0.3s ease-in-out`,
           backgroundColor: "var(--light-grey)",
-          zIndex: '999',
+          zIndex: "999",
         }}
       >
         {/* Search Bar */}
         <Box
           sx={{
-            width: "100%",
+            width: { xs: "80%", md: "100%" },
             display: "flex",
             alignItems: "center",
-            padding: "30px",
+            padding: { xs: "12px", md: "30px" },
             maxWidth: "900px",
             backgroundColor: "white",
             borderRadius: "100px",
@@ -99,21 +99,24 @@ const SearchBarPopup = ({ setIsOpenSearch }) => {
               outline: 0,
               border: 0,
               fontFamily: "Poppins",
-              fontSize: "16px",
+              fontSize: { xs: "12px", md: "16px" },
               textTransform: "uppercase",
               fontWeight: "500",
             }}
           />
           <Button
             variant="contained"
-            startIcon={<SearchRounded />}
+            startIcon={<SearchRounded sx={{ marginRight: "-10px" }} />}
             onClick={SearchBarHandler}
             sx={{
               backgroundColor: "var(--secondary-color)",
-              borderRadius: "20px",
+              borderRadius: { xs: "50px", md: "20px" },
               textTransform: "capitalize",
               display: "flex",
+              fontSize: { xs: "0px", md: "16px" },
               gap: "0px",
+              minWidth: { xs: "50px", md: "64px" },
+              padding: { xs: "14px 0px", md: "16px" },
             }}
           >
             Search
@@ -123,11 +126,11 @@ const SearchBarPopup = ({ setIsOpenSearch }) => {
         {/* Product Bar */}
         <Box
           sx={{
-            width: '100%',
+            width: { xs: "80%", md: "100%" },
             display: "flex",
             gap: "16px",
             alignItems: "start",
-            padding: "30px",
+            padding: { xs: "16px", md: "30px" },
             maxWidth: "900px",
             backgroundColor: "white",
             borderRadius: "30px",
@@ -152,7 +155,7 @@ const SearchBarPopup = ({ setIsOpenSearch }) => {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "start",
-                    gap: "8px",
+                    gap: {xs: "16px", md: "8px"},
                     padding: "16px",
                     borderRadius: "10px",
                     border: "1px solid lightgrey",
@@ -167,8 +170,26 @@ const SearchBarPopup = ({ setIsOpenSearch }) => {
                       borderRadius: "8px",
                     }}
                   />
-                  <Typography variant="h6">{item.name}</Typography>
-                  <Typography variant="body2">{item.description}</Typography>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontSize: { xs: "1rem", md: "1.2rem" },
+                      lineHeight: { xs: "1.2rem", md: "1.4rem" },
+                      letterSpacing: "-0.6px",
+                    }}
+                  >
+                    {item.name}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontSize: { xs: "0.7rem", md: "0.9rem" },
+                      letterSpacing: "-0.4px",
+                      marginTop: '-10px'
+                    }}
+                  >
+                    {item.description}
+                  </Typography>
                 </ListItem>
               ))
             ) : (

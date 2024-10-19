@@ -73,7 +73,7 @@ const MobileMenuPopup = ({ pages, setMblMenuOpen }) => {
         animation: `${
           isClose ? slideOutToLeft : slideInFromLeft
         } 0.3s ease-out`,
-        zIndex: '999',
+        zIndex: "999",
       }}
     >
       <Box
@@ -127,11 +127,10 @@ const MobileMenuPopup = ({ pages, setMblMenuOpen }) => {
                   sx: {
                     fontSize: "32px",
                     textTransform: "uppercase",
-                    color: "var(--primary-color)",
                     color: "var(--white-full)",
                     fontWeight: "700",
                     zIndex: "10",
-                    fontFamily: "Ahsing",
+                    fontFamily: "Ahsing, sans-serif",
                     opacity: 0,
                     animation: `${fadeInText} 0.6s ease-out forwards`,
                     animationDelay: `${index * 0.2}s`,
