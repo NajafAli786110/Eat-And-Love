@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: "Ahsing";
-  src: local("Ahsing"), url(./assets/fonts/Ahsing.otf), format("otf");
+  src: local("Ahsing"), url(/fonts/Ahsing.otf), format("otf");
 }
 
 body {
