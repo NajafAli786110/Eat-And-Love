@@ -73,6 +73,7 @@ const MobileMenuPopup = ({ pages, setMblMenuOpen }) => {
         animation: `${
           isClose ? slideOutToLeft : slideInFromLeft
         } 0.3s ease-out`,
+        zIndex: '999',
       }}
     >
       <Box

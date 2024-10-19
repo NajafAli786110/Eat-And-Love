@@ -9,10 +9,7 @@ const ProductCard = ({ product }) => {
         borderRadius: "8px",
         overflow: "hidden",
         textAlign: "center",
-        transition: "transform 0.3s",
-        "&:hover": {
-          transform: "scale(1.05)",
-        },
+        overflow: "hidden",
       }}
     >
       <img
@@ -23,10 +20,33 @@ const ProductCard = ({ product }) => {
           height: "200px",
           objectFit: "cover",
         }}
+        className="product-image"
       />
-      <Box sx={{ padding: "16px" }}>
-        <Typography variant="h6">{product.name}</Typography>
-        <Typography variant="body2" color="text.secondary">
+      <Box
+        sx={{
+          padding: "16px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "8px",
+        }}
+      >
+        <Typography
+          variant="h6"
+          sx={{
+            fontSize: { xs: "1rem", md: "1.2rem" },
+            lineHeight: { xs: "1.2rem", md: "1.4rem" },
+            letterSpacing: "-0.4px",
+          }}
+        >
+          {product.name}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            fontSize: { xs: "0.7rem", md: "0.9rem" },
+          }}
+          color="text.secondary"
+        >
           {product.description}
         </Typography>
       </Box>

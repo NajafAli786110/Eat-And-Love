@@ -11,7 +11,7 @@ const HeroSection = () => {
         flexDirection: "column",
         gap: "32px",
         justifyContent: "center",
-        padding: "30px 0px",
+        padding: {xs: '50px 20px', md: "30px 30px"},
       }}
     >
       <Toolbar disableGutters>
@@ -32,7 +32,7 @@ const HeroSection = () => {
               flexDirection: "column",
               alignItems: "flex-start",
               gap: "20px",
-              maxWidth: "50%",
+              maxWidth: {sm: '100%', md: "50%"},
             }}
           >
             {/* Subheading */}
@@ -65,10 +65,10 @@ const HeroSection = () => {
             <Typography
               variant="h1"
               sx={{
-                fontSize: { xs: "2.5rem", sm: "4.5rem" },
+                fontSize: { xs: "3.2rem", sm: "4.5rem" },
                 fontWeight: "700",
                 fontFamily: "Poppins",
-                letterSpacing: "-4px",
+                letterSpacing: {xs: '-2px', md:"-4px"},
               }}
             >
               Claim Best Offer on
@@ -123,6 +123,7 @@ const HeroSection = () => {
           <Box
             sx={{
               width: { xs: "100%", sm: "50%" },
+              display: { xs: 'none', md: 'block' },
             }}
           >
             <img

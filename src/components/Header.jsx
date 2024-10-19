@@ -17,31 +17,17 @@ import SearchBarPopup from "./SearchBarPopup";
 
 // Demo Data
 const pages = [
-  {
-    name: "Home",
-    link: "/",
-  },
-  {
-    name: "Our Menu",
-    link: "/menu",
-  },
-  {
-    name: "Our Locations",
-    link: "/location",
-  },
-  {
-    name: "About Us",
-    link: "/about-us",
-  },
-  {
-    name: "Contact Us",
-    link: "/contact-us",
-  },
+  { name: "Home", link: "/" },
+  { name: "Our Menu", link: "/menu" },
+  { name: "Our Locations", link: "/location" },
+  { name: "About Us", link: "/about-us" },
+  { name: "Contact Us", link: "/contact-us" },
 ];
 
 const Header = () => {
   const [mblMenuOpen, setMblMenuOpen] = React.useState(false);
   const [isOpenSearch, setIsOpenSearch] = React.useState(false);
+
   return (
     <>
       <AppBar
@@ -53,7 +39,7 @@ const Header = () => {
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            {/* Dekstop Menu */}
+            {/* Desktop Menu */}
             <Box
               sx={{
                 display: "flex",
@@ -65,10 +51,7 @@ const Header = () => {
               <Link to="/">
                 <Box
                   component="img"
-                  sx={{
-                    width: { xs: "150px", md: "220px" },
-                    height: "auto",
-                  }}
+                  sx={{ width: { xs: "150px", md: "220px" }, height: "auto" }}
                   src="/assets/Logo.png"
                   alt="Eat & Love"
                 />
@@ -99,7 +82,6 @@ const Header = () => {
                         to={item.link}
                         style={{
                           textDecoration: "none",
-                          color: "var(--primary-color)",
                         }}
                       >
                         <ListItemText
@@ -108,7 +90,7 @@ const Header = () => {
                             sx: {
                               fontSize: "12px",
                               textTransform: "uppercase",
-                              color: "var(--primary-color)",
+                              color: 'primary.main',
                             },
                           }}
                         />
@@ -116,44 +98,31 @@ const Header = () => {
                     </ListItem>
                   ))}
                 </List>
-                <Box
-                  sx={{
-                    display: "flex",
-                    gap: "8px",
-                    alignItems: "center",
-                  }}
-                >
+
+                {/* Icons */}
+                <Box sx={{ display: "flex", gap: "8px", alignItems: "center" }}>
                   {/* Search Icon */}
                   <Button
                     onClick={() => setIsOpenSearch(true)}
-                    sx={{
-                      minWidth: { xs: "18px", sm: "25px" },
-                    }}
+                    sx={{ minWidth: { xs: "18px", sm: "25px" } }}
                   >
                     <Search
                       sx={{
-                        color: "var(--font-color)",
+                        color: "common.fontColor",
                         fontSize: { xs: "18px", sm: "25px" },
                       }}
                     />
                   </Button>
 
                   {/* Cart Icon */}
-                  <Box
-                    sx={{
-                      position: "relative",
-                      mb: "-5px",
-                    }}
-                  >
+                  <Box sx={{ position: "relative", mb: "-5px" }}>
                     <ShoppingCart
                       sx={{
                         color: "var(--font-color)",
                         fontSize: { xs: "18px", sm: "25px" },
-                        zIndex: "2",
                       }}
                     />
                     <Typography
-                      variant="p"
                       sx={{
                         fontSize: { xs: "6px", md: "8px" },
                         padding: { xs: "2px 5px", md: "2px 6px" },
@@ -169,7 +138,7 @@ const Header = () => {
                     </Typography>
                   </Box>
 
-                  {/* Menu Bar For Phone */}
+                  {/* Mobile Menu */}
                   <Button
                     sx={{
                       color: "var(--font-color)",
@@ -181,14 +150,11 @@ const Header = () => {
                     onClick={() => setMblMenuOpen(true)}
                   >
                     <Menu
-                      sx={{
-                        color: "var(--font-color)",
-                        fontSize: "18px",
-                        zIndex: "10",
-                      }}
+                      sx={{ color: "var(--font-color)", fontSize: "18px" }}
                     />
                   </Button>
                 </Box>
+
                 <Button
                   variant="contained"
                   startIcon={<Login />}
