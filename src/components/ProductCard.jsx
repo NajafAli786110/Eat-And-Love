@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
       />
       <Box
         sx={{
-          padding: "16px",
+          padding: { xs: "10px", md: "16px" },
           display: "flex",
           flexDirection: "column",
           gap: "8px",
@@ -35,7 +35,7 @@ const ProductCard = ({ product }) => {
           sx={{
             fontSize: { xs: "1rem", md: "1.2rem" },
             lineHeight: { xs: "1.2rem", md: "1.4rem" },
-            letterSpacing: "-0.4px",
+            letterSpacing: "-0.6px",
           }}
         >
           {product.name}
@@ -44,6 +44,7 @@ const ProductCard = ({ product }) => {
           variant="body2"
           sx={{
             fontSize: { xs: "0.7rem", md: "0.9rem" },
+            letterSpacing: "-0.4px",
           }}
           color="text.secondary"
         >

@@ -65,7 +65,7 @@ const HeroSection = () => {
             <Typography
               variant="h1"
               sx={{
-                fontSize: { xs: "3.2rem", sm: "4.5rem" },
+                fontSize: { xs: "2.5rem", sm: "4.5rem" },
                 fontWeight: "700",
                 fontFamily: "Poppins",
                 letterSpacing: {xs: '-2px', md:"-4px"},

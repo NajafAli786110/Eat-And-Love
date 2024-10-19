@@ -49,8 +49,12 @@ const WhyChoose = () => {
           sx={{
             flex: "1",
             textAlign: "center",
-            minWidth: {xs: "23%", md: "10%"},
-            padding: "20px",
+            minWidth: { xs: "25%", md: "10%" },
+            padding: { xs: "10px", md: "20px" },
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: { xs: "10px", md: "8px" },
             border: "1px solid transparent",
             backgroundColor: "white",
             borderRadius: "12px",
@@ -63,19 +67,30 @@ const WhyChoose = () => {
         >
           <Box
             component="img"
-            sx={{ width: { xs: "40px", md: "50px" }, height: "auto" }}
+            sx={{ width: { xs: "50px", md: "50px" }, height: "auto" }}
             src={feature.icon}
             alt="Eat & Love"
           />
           <Typography
             variant="h6"
-            sx={{ fontWeight: "bold", fontFamily: "Poppins" }}
+            sx={{
+              fontWeight: "bold",
+              fontFamily: "Poppins",
+              fontSize: { xs: "1rem", md: "1.2rem" },
+              lineHeight: { xs: "1.2rem", md: "1.4rem" },
+              letterSpacing: "-0.6px",
+            }}
           >
             {feature.title}
           </Typography>
           <Typography
             variant="body2"
-            sx={{ fontFamily: "Poppins", fontSize: "12px", fontWeight: "300" }}
+            sx={{
+              fontFamily: "Poppins",
+              fontSize: { xs: "10px", md: "12px" },
+              fontWeight: "300",
+              letterSpacing: "-0.4px",
+            }}
           >
             {feature.description}
           </Typography>
