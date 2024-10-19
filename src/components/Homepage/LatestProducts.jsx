@@ -13,7 +13,7 @@ const LatestProducts = () => {
     },
   };
   return (
-    <Box sx={{ padding: "40px 20px", backgroundColor: "#f9f9f9" }}>
+    <Box sx={{ padding: "60px 20px 100px 20px", backgroundColor: "#f9f9f9" }}>
       <Typography
         variant="h2"
         sx={{ textAlign: "center", marginBottom: "20px" }}
