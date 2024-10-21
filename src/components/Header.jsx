@@ -18,8 +18,7 @@ import SearchBarPopup from "./SearchBarPopup";
 // Demo Data
 const pages = [
   { name: "Home", link: "/" },
-  { name: "Our Menu", link: "/menu" },
-  { name: "Our Locations", link: "/location" },
+  { name: "Our Menus", link: "/shop" },
   { name: "About Us", link: "/about-us" },
   { name: "Contact Us", link: "/contact-us" },
 ];
@@ -90,7 +89,7 @@ const Header = () => {
                             sx: {
                               fontSize: "12px",
                               textTransform: "uppercase",
-                              color: 'primary.main',
+                              color: "primary.main",
                             },
                           }}
                         />

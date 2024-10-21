@@ -70,7 +70,7 @@ export default function Footer() {
             target="_blank"
             style={{
               textDecoration: "none",
-              color: "primary.main",
+              color: "#442a00",
               fontWeight: "bold",
             }}
           >

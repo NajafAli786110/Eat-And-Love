@@ -31,7 +31,6 @@ const Theme = createTheme({
       textTransform: "capitalize",
       fontSize: "1rem",
     },
-
   },
 });
 

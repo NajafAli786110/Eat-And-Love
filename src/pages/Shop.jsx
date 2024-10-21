@@ -1,7 +1,161 @@
-import React from 'react'
+import React, { useState } from "react";
+import { ProductCard } from "../components";
+import { Container, Box, Typography, List } from "@mui/material";
+import { ProductsData } from "../appConstantData/ProductsData";
 
 export default function Shop() {
+  const [searchQuery, setSearchQuery] = useState("");
+  // Styling for Grid
+  const styleGrid = {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, auto)",
+    gap: "16px",
+    "@media (max-width: 600px)": {
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: "6px",
+    },
+  };
+
+  // Filter Products by Category
+  let filterProducts = ProductsData.filter((products) =>
+    products.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const uniqueCategories = [
+    ...new Map(
+      ProductsData.map((item) => [
+        item.category,
+        { categoryName: item.category, categoryImage: item.imageUrl },
+      ])
+    ).values(),
+  ];
+
   return (
-    <div>Coming from Shop</div>
-  )
+    <>
+      <Container maxWidth="xl">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            gap: { xs: "24px", md: "32px" },
+            padding: { xs: "60px 0px 100px 0px", md: "100px 0px" },
+            alignItems: "flex-start",
+            justifyContent: "space-evenly",
+          }}
+        >
+          {/* Left Column */}
+          <Box
+            sx={{
+              width: { xs: "100%", md: "15%" },
+              padding: "10px",
+              background: "#f9f9f9",
+              borderRadius: "16px",
+            }}
+          >
+            <Typography
+              variant="h4"
+              sx={{
+                fontSize: { xs: "15px", md: "18px" },
+                marginBottom: { xs: "4px", md: "6px" },
+                fontWeight: "500",
+              }}
+            >
+              Filter
+            </Typography>
+
+            {/* Search Bar */}
+            <Box
+              sx={{
+                border: "1px solid #00000025",
+                padding: { xs: "8px 14px", md: "8px 22px" },
+                borderRadius: "4px",
+              }}
+            >
+              <input
+                type="search"
+                name="search"
+                id="searchQuery"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Zinger Roll..."
+                style={{
+                  border: "none",
+                  outline: "none",
+                  backgroundColor: "transparent",
+                  width: "100%",
+                }}
+              />
+            </Box>
+
+            {/* Categories List */}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: {xs: "row", md: "column"},
+                overflowX: 'scroll',
+                gap: "8px",
+                marginTop: "18px",
+              }}
+            >
+              {uniqueCategories.map((item, index) => (
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: "4px",
+                    alignItems: "center",
+                    width: {xs: '48%', md: '100%'}
+                  }}
+                  key={index}
+                >
+                  <img
+                    src={item.categoryImage}
+                    alt={item.categoryName}
+                    height="30px"
+                    width="30px"
+                    style={{
+                      borderRadius: "100px",
+                    }}
+                  />
+                  <Typography
+                    variant="body2"
+                    key={index}
+                    sx={{
+                      fontSize: { xs: "8px", md: "11px" },
+                      fontWeight: "300",
+                    }}
+                  >
+                    {item.categoryName}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+
+          {/* Right Column */}
+          <Box
+            sx={{
+              width: { xs: "100%", md: "85%" },
+            }}
+          >
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: styleGrid,
+                gap: "20px",
+                width: "100%",
+              }}
+            >
+              {filterProducts.length > 0 ? (
+                filterProducts.map((product, index) => (
+                  <ProductCard key={index} product={product} />
+                ))
+              ) : (
+                <Typography variant="body6">No Products Found</Typography>
+              )}
+            </Box>
+          </Box>
+        </Box>
+      </Container>
+    </>
+  );
 }

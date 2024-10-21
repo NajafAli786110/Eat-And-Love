@@ -6,14 +6,21 @@ import { ProductsData } from "../../appConstantData/ProductsData";
 const LatestProducts = () => {
   const styleGrid = {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", 
+    gridTemplateColumns: "repeat(4, auto)",
     gap: "16px",
+    "@media (max-width: 1200px)": {
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gap: "6px",
+    },
     "@media (max-width: 600px)": {
       gridTemplateColumns: "repeat(2, 1fr)",
+      gap: "6px",
     },
   };
   return (
-    <Box sx={{ padding: "60px 20px 100px 20px", backgroundColor: "#f9f9f9" }}>
+    <Box
+      sx={{ padding: { xs: "40px 0px 100px 0px", md: "60px 20px 100px 20px" } }}
+    >
       <Typography
         variant="h2"
         sx={{ textAlign: "center", marginBottom: "20px" }}
