@@ -9,8 +9,8 @@ const Theme = createTheme({
       main: "#d84012",
     },
     common: {
-      white: '#ffffff',
-      fontColor: '#3a3a3a',
+      white: "#ffffff",
+      fontColor: "#3a3a3a",
     },
   },
   typography: {
@@ -30,6 +30,11 @@ const Theme = createTheme({
     button: {
       textTransform: "capitalize",
       fontSize: "1rem",
+    },
+    pageBanner: {
+      fontSize: { xs: "42px", md: "58px" },
+      fontFamily: "Ahsing, sans-serif",
+      color: 'white',
     },
   },
 });

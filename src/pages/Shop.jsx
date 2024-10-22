@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ProductCard } from "../components";
+import { InnerPageBanner, ProductCard } from "../components";
 import { Container, Box, Typography, List } from "@mui/material";
 import { ProductsData } from "../appConstantData/ProductsData";
 
@@ -33,12 +33,15 @@ export default function Shop() {
   return (
     <>
       <Container maxWidth="xl">
+        {/* Page Banner */}
+        <InnerPageBanner mainHeading="Taste the Flavor" />
+        {/* Shop Our Menus Section */}
         <Box
           sx={{
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             gap: { xs: "24px", md: "32px" },
-            padding: { xs: "60px 0px 100px 0px", md: "100px 0px" },
+            padding: { xs: "60px 0px 100px 0px", md: "60px 0px 100px 0px" },
             alignItems: "flex-start",
             justifyContent: "space-evenly",
           }}
@@ -91,8 +94,8 @@ export default function Shop() {
             <Box
               sx={{
                 display: "flex",
-                flexDirection: {xs: "row", md: "column"},
-                overflowX: 'scroll',
+                flexDirection: { xs: "row", md: "column" },
+                overflowX: "scroll",
                 gap: "8px",
                 marginTop: "18px",
               }}
@@ -103,7 +106,7 @@ export default function Shop() {
                     display: "flex",
                     gap: "4px",
                     alignItems: "center",
-                    width: {xs: '48%', md: '100%'}
+                    width: { xs: "48%", md: "100%" },
                   }}
                   key={index}
                 >
