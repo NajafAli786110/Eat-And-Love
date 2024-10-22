@@ -41,7 +41,7 @@ export default function Shop() {
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             gap: { xs: "24px", md: "32px" },
-            padding: { xs: "60px 0px 100px 0px", md: "60px 0px 100px 0px" },
+            padding: { xs: "30px 0px 100px 0px", md: "60px 0px 100px 0px" },
             alignItems: "flex-start",
             justifyContent: "space-evenly",
           }}

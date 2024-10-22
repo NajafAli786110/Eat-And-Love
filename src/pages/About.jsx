@@ -18,7 +18,7 @@ const About = () => {
       {/* Content */}
       <Box
         sx={{
-          padding: {xs: "20px 0px 100px 0px", md: "60px 0px 100px 0px"},
+          padding: { xs: "20px 0px 100px 0px", md: "60px 0px 100px 0px" },
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

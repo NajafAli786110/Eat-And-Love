@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   Button,
   List,
@@ -24,8 +24,13 @@ const pages = [
 ];
 
 const Header = () => {
+  const locationTrack = useLocation();
   const [mblMenuOpen, setMblMenuOpen] = React.useState(false);
   const [isOpenSearch, setIsOpenSearch] = React.useState(false);
+
+  React.useEffect(() => {
+    setMblMenuOpen(false);
+  }, [locationTrack]);
 
   return (
     <>

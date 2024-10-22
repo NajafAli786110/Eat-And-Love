@@ -8,7 +8,7 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const slideInFromLeft = keyframes`
   0% {
@@ -53,6 +53,7 @@ const MobileMenuPopup = ({ pages, setMblMenuOpen }) => {
       setMblMenuOpen(false);
     }, 300);
   };
+
   return (
     <Box
       sx={{

@@ -15,7 +15,7 @@ const InnerPageBanner = ({ mainHeading }) => {
     >
       <Typography
         sx={{
-          fontSize: { xs: "42px", md: "58px" },
+          fontSize: { xs: "32px", md: "58px" },
           fontFamily: "Ahsing, sans-serif",
           color: "white",
           textAlign: "center",
