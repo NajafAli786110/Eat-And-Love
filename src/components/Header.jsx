@@ -159,18 +159,22 @@ const Header = () => {
                   </Button>
                 </Box>
 
-                <Button
-                  variant="contained"
-                  startIcon={<Login />}
-                  sx={{
-                    backgroundColor: "var(--secondary-color)",
-                    borderRadius: "20px",
-                    textTransform: "capitalize",
-                    display: { xs: "none", sm: "flex" },
-                  }}
-                >
-                  Login
-                </Button>
+                <Link to="/login" style={{
+                  textDecoration: 'none',
+                }}>
+                  <Button
+                    variant="contained"
+                    startIcon={<Login />}
+                    sx={{
+                      backgroundColor: "var(--secondary-color)",
+                      borderRadius: "20px",
+                      textTransform: "capitalize",
+                      display: { xs: "none", sm: "flex" },
+                    }}
+                  >
+                    Login
+                  </Button>
+                </Link>
               </Box>
             </Box>
           </Toolbar>
