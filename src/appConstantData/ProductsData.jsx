@@ -180,3 +180,61 @@ export const ProductsData = [
     category: "Breakfast",
   },
 ];
+
+export const CartData = [
+  {
+    id: "1",
+    name: "Classic Cheeseburger",
+    description:
+      "A delicious cheeseburger with lettuce, tomato, onions, and pickles on a toasted bun.",
+    imageUrl:
+      "https://img.freepik.com/free-photo/delicious-burger-with-fresh-ingredients_23-2150857908.jpg",
+    category: "Burgers",
+    quantity: '1',
+    price: '20'
+  },
+  {
+    id: "2",
+    name: "Margherita Pizza",
+    description:
+      "A classic Italian pizza topped with fresh mozzarella, tomatoes, and basil leaves.",
+    imageUrl:
+      "https://img.freepik.com/premium-photo/pizza-with-eggs-it-plate-pizza-with-green-leaf-it_872941-319.jpg",
+    category: "Pizzas",
+    quantity: '1',
+    price: '10'
+  },
+  {
+    id: "3",
+    name: "Spaghetti Carbonara",
+    description:
+      "Spaghetti pasta in a rich creamy sauce with pancetta, Parmesan cheese, and black pepper.",
+    imageUrl:
+      "https://img.freepik.com/free-photo/pasta-dish-restaurant-table_7939-2485.jpg",
+    category: "Pastas",
+    quantity: '2',
+    price: '30'
+  },
+  {
+    id: "4",
+    name: "Caesar Salad",
+    description:
+      "Crisp romaine lettuce, croutons, and Parmesan cheese, tossed in a tangy Caesar dressing.",
+    imageUrl:
+      "https://img.freepik.com/free-photo/caesar-salad-with-fried-shrimps_140725-6065.jpg",
+    category: "Salads",
+    quantity: '1',
+    price: '20'
+  },
+  {
+    id: "5",
+    name: "Grilled Chicken Sandwich",
+    description:
+      "Grilled chicken breast on a brioche bun with lettuce, tomato, and honey mustard sauce.",
+    imageUrl:
+      "https://img.freepik.com/free-photo/sandwich-with-ground-meat_658428-396.jpg",
+    category: "Sandwiches",
+    quantity: '1',
+    price: '50'
+  },
+];

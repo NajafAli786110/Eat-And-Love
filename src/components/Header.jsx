@@ -14,6 +14,8 @@ import {
 import { Search, ShoppingCart, Login, Menu } from "@mui/icons-material";
 import MobileMenuPopup from "./MobileMenuPopup";
 import SearchBarPopup from "./SearchBarPopup";
+import CartPopup from "./cart/CartPopup";
+import { CartData } from "../appConstantData/ProductsData";
 
 // Demo Data
 const pages = [
@@ -27,6 +29,7 @@ const Header = () => {
   const locationTrack = useLocation();
   const [mblMenuOpen, setMblMenuOpen] = React.useState(false);
   const [isOpenSearch, setIsOpenSearch] = React.useState(false);
+  const [isCartOpen, setIsCartOpen] = React.useState(false);
 
   React.useEffect(() => {
     setMblMenuOpen(false);
@@ -119,27 +122,36 @@ const Header = () => {
                   </Button>
 
                   {/* Cart Icon */}
-                  <Box sx={{ position: "relative", mb: "-5px" }}>
-                    <ShoppingCart
+                  <Box sx={{ mb: "-5px" }}>
+                    <Button
                       sx={{
-                        color: "var(--font-color)",
-                        fontSize: { xs: "18px", sm: "25px" },
+                        minWidth: { xs: "18px", sm: "25px" },
+                        position: "relative",
+                        padding: '0px'
                       }}
-                    />
-                    <Typography
-                      sx={{
-                        fontSize: { xs: "6px", md: "8px" },
-                        padding: { xs: "2px 5px", md: "2px 6px" },
-                        backgroundColor: "var(--secondary-color)",
-                        color: "var(--white-full)",
-                        borderRadius: "100px",
-                        position: "absolute",
-                        top: -10,
-                        right: -5,
-                      }}
+                      onClick={() => setIsCartOpen(true)}
                     >
-                      2
-                    </Typography>
+                      <ShoppingCart
+                        sx={{
+                          color: "var(--font-color)",
+                          fontSize: { xs: "18px", sm: "25px" },
+                        }}
+                      />
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "6px", md: "8px" },
+                          padding: { xs: "2px 5px", md: "2px 6px" },
+                          backgroundColor: "var(--secondary-color)",
+                          color: "var(--white-full)",
+                          borderRadius: "100px",
+                          position: "absolute",
+                          top: -10,
+                          right: -5,
+                        }}
+                      >
+                        {CartData.length}
+                      </Typography>
+                    </Button>
                   </Box>
 
                   {/* Mobile Menu */}
@@ -159,9 +171,12 @@ const Header = () => {
                   </Button>
                 </Box>
 
-                <Link to="/login" style={{
-                  textDecoration: 'none',
-                }}>
+                <Link
+                  to="/login"
+                  style={{
+                    textDecoration: "none",
+                  }}
+                >
                   <Button
                     variant="contained"
                     startIcon={<Login />}
@@ -184,6 +199,7 @@ const Header = () => {
       {mblMenuOpen && (
         <MobileMenuPopup pages={pages} setMblMenuOpen={setMblMenuOpen} />
       )}
+      {isCartOpen && <CartPopup setIsCartOpen={setIsCartOpen} />}
     </>
   );
 };
