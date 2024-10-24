@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserData } from "../appConstantData/UserData";
 
 const Login = () => {
-
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     username: "",
@@ -29,13 +28,11 @@ const Login = () => {
       ) {
         userRole = item.role;
         console.log(userRole);
-        alert(`${item.name} You're Login Successfully!.. Welcome Back Bro`)
+        alert(`${item.name} You're Login Successfully!.. Welcome Back Bro`);
         navigate("/");
       }
-
-      return "No User Found";
     });
-
+    alert("Incorrect Email Or Password");
     setLoginData({
       username: "",
       password: "",
