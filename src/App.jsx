@@ -4,6 +4,7 @@ import AppRoutes from "./appRouting/AppRoutes";
 import Theme from "./muiTheme/Theme";
 
 function App() {
+
   return (
     <ThemeProvider theme={Theme}>
       <AppRoutes />

@@ -10,8 +10,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { UserData } from "../appConstantData/UserData";
 
 const Signup = () => {
   const [signUpData, setSignUpData] = useState({
@@ -34,6 +35,48 @@ const Signup = () => {
       userRole: event.target.value,
     });
   };
+
+  // Error Handling
+  useEffect(() => {
+    UserData.map((item) => {
+      if (item.email === signUpData.userEmail) {
+        alert("Email Already Exist");
+        setSignUpData({
+          ...signUpData,
+          userEmail: "",
+        });
+      }
+      if (item.username === signUpData.username) {
+        alert("Username Already Exist");
+        setSignUpData({
+          ...signUpData,
+          username: "",
+        });
+      }
+    });
+  }, [signUpData.userEmail, signUpData.username]);
+
+  // onSignUpHandler
+  const onSignUpHandler = () => {
+    console.log(UserData);
+    UserData.push({
+      id: Math.random(),
+      name: signUpData.fullName,
+      email: signUpData.userEmail,
+      role: signUpData.userRole,
+      username: signUpData.username,
+      password: signUpData.password,
+    });
+    console.log(UserData);
+    setSignUpData({
+      fullName: "",
+      username: "",
+      password: "",
+      userRole: "",
+      userEmail: "",
+    });
+  };
+
   return (
     <Container
       sx={{
@@ -67,6 +110,8 @@ const Signup = () => {
         >
           Creating an account
         </Typography>
+
+        {/* Field Sets */}
         <Box
           sx={{
             display: "flex",
@@ -140,6 +185,7 @@ const Signup = () => {
               gap: "8px",
             }}
           >
+            {/* Sign Up Button */}
             <Button
               variant="contained"
               startIcon={<LoginOutlined />}
@@ -149,9 +195,12 @@ const Signup = () => {
                 textTransform: "capitalize",
                 padding: "6px 24px",
               }}
+              onClick={onSignUpHandler}
             >
               Signup
             </Button>
+
+            {/* Login Redirect Btn */}
             <Link
               to="/login"
               style={{

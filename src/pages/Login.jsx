@@ -1,18 +1,44 @@
 import { LoginOutlined } from "@mui/icons-material";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserData } from "../appConstantData/UserData";
 
 const Login = () => {
+
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
   });
 
+  let userRole = "";
+
   const onChangeHandler = (e) => {
     setLoginData({
       ...loginData,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const LoginDataHandler = () => {
+    UserData.map((item) => {
+      if (
+        item.username === loginData.username &&
+        item.password === loginData.password
+      ) {
+        userRole = item.role;
+        console.log(userRole);
+        alert(`${item.name} You're Login Successfully!.. Welcome Back Bro`)
+        navigate("/");
+      }
+
+      return "No User Found";
+    });
+
+    setLoginData({
+      username: "",
+      password: "",
     });
   };
   return (
@@ -42,12 +68,14 @@ const Login = () => {
       >
         <Typography
           sx={{
-            fontSize: {xs:"22px", md: "32px"},
+            fontSize: { xs: "22px", md: "32px" },
             fontFamily: "Ahsing, sans-serif",
           }}
         >
           Enter Your Login Details
         </Typography>
+
+        {/* Login FIELDS */}
         <Box
           sx={{
             display: "flex",
@@ -86,6 +114,7 @@ const Login = () => {
               gap: "8px",
             }}
           >
+            {/* Login Button */}
             <Button
               variant="contained"
               startIcon={<LoginOutlined />}
@@ -95,9 +124,12 @@ const Login = () => {
                 textTransform: "capitalize",
                 padding: "6px 24px",
               }}
+              onClick={LoginDataHandler}
             >
               Login
             </Button>
+
+            {/* Create Account Btn */}
             <Link
               to="/signup"
               style={{
