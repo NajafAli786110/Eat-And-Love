@@ -190,8 +190,8 @@ export const CartData = [
     imageUrl:
       "https://img.freepik.com/free-photo/delicious-burger-with-fresh-ingredients_23-2150857908.jpg",
     category: "Burgers",
-    quantity: '1',
-    price: '20'
+    quantity: 1,
+    price: 20,
   },
   {
     id: "2",
@@ -201,8 +201,8 @@ export const CartData = [
     imageUrl:
       "https://img.freepik.com/premium-photo/pizza-with-eggs-it-plate-pizza-with-green-leaf-it_872941-319.jpg",
     category: "Pizzas",
-    quantity: '1',
-    price: '10'
+    quantity: 1,
+    price: 10,
   },
   {
     id: "3",
@@ -212,8 +212,8 @@ export const CartData = [
     imageUrl:
       "https://img.freepik.com/free-photo/pasta-dish-restaurant-table_7939-2485.jpg",
     category: "Pastas",
-    quantity: '2',
-    price: '30'
+    quantity: 2,
+    price: 30,
   },
   {
     id: "4",
@@ -223,8 +223,8 @@ export const CartData = [
     imageUrl:
       "https://img.freepik.com/free-photo/caesar-salad-with-fried-shrimps_140725-6065.jpg",
     category: "Salads",
-    quantity: '1',
-    price: '20'
+    quantity: 1,
+    price: 20,
   },
   {
     id: "5",
@@ -234,7 +234,7 @@ export const CartData = [
     imageUrl:
       "https://img.freepik.com/free-photo/sandwich-with-ground-meat_658428-396.jpg",
     category: "Sandwiches",
-    quantity: '1',
-    price: '50'
+    quantity: 1,
+    price: 50,
   },
 ];

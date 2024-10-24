@@ -3,6 +3,7 @@ import { Box, Button, IconButton, Typography, keyframes } from "@mui/material";
 import { Close, Add, Remove } from "@mui/icons-material";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { CartData } from "../../appConstantData/ProductsData";
+import { Link } from "react-router-dom";
 
 const slideInFromRight = keyframes`
   0% {
@@ -33,6 +34,8 @@ const totalPrice = CartData.reduce(
 
 const CartPopup = ({ setIsCartOpen }) => {
   const [isClose, setIsClose] = useState(true);
+
+  // Cart Close
   const closeCartPopup = () => {
     setIsClose(false);
     setTimeout(() => {
@@ -183,19 +186,28 @@ const CartPopup = ({ setIsCartOpen }) => {
         </Box>
 
         {/* Checkout Button */}
-        <Button
-          variant="contained"
-          startIcon={<IoBagCheckOutline />}
-          sx={{
-            backgroundColor: "var(--primary-color)",
-            borderRadius: "100px",
-            textTransform: "capitalize",
-            padding: "6px 24px",
-            marginTop: "20px",
+        <Link
+          to="/checkout"
+          style={{
+            width: "100%",
           }}
         >
-          Checkout
-        </Button>
+          <Button
+            variant="contained"
+            startIcon={<IoBagCheckOutline />}
+            sx={{
+              backgroundColor: "var(--primary-color)",
+              borderRadius: "100px",
+              textTransform: "capitalize",
+              padding: "6px 24px",
+              marginTop: "20px",
+              width: "100%",
+            }}
+            onClick={closeCartPopup}
+          >
+            Checkout
+          </Button>
+        </Link>
       </Box>
     </Box>
   );
