@@ -8,9 +8,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { ProductsData } from "../appConstantData/ProductsData";
+import ProductCard from "./ProductCard";
+import { useSelector } from "react-redux";
 
 const SearchBarPopup = ({ setIsOpenSearch }) => {
+  const ProductsData = useSelector((state) => state.products);
   const [searchQuery, setSearchQuery] = useState("");
   const [isClosing, setIsClosing] = useState(false);
 
@@ -55,7 +57,7 @@ const SearchBarPopup = ({ setIsOpenSearch }) => {
     <>
       <Box
         sx={{
-          height: {xs: "100vh", md: "80vh"},
+          height: { xs: "100vh", md: "80vh" },
           width: "100%",
           padding: "30px 0px",
           display: "flex",
@@ -115,12 +117,10 @@ const SearchBarPopup = ({ setIsOpenSearch }) => {
               display: "flex",
               fontSize: { xs: "0px", md: "16px" },
               gap: "0px",
-              minWidth: { xs: "50px", md: "64px" },
-              padding: { xs: "14px 0px", md: "16px" },
+              minWidth: { xs: "18px", md: "18px" },
+              padding: { xs: "6px 10px", md: "10px 14px" },
             }}
-          >
-            Search
-          </Button>
+          ></Button>
         </Box>
 
         {/* Product Bar */}
@@ -139,58 +139,17 @@ const SearchBarPopup = ({ setIsOpenSearch }) => {
         >
           <List
             sx={{
-              width: "100%",
               display: "flex",
-              flexDirection: "column",
+              flexWrap: "wrap",
+              alignItem: "center",
+              justifyContent: "space-between",
               gap: "16px",
-              alignItems: "center",
+              width: '100%',
             }}
           >
             {filterProductByQuery.length > 0 ? (
               filterProductByQuery.map((item, index) => (
-                <ListItem
-                  key={index}
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "start",
-                    gap: {xs: "16px", md: "8px"},
-                    padding: "16px",
-                    borderRadius: "10px",
-                    border: "1px solid lightgrey",
-                  }}
-                >
-                  <img
-                    src={item.imageUrl}
-                    alt={item.name}
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      borderRadius: "8px",
-                    }}
-                  />
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontSize: { xs: "1rem", md: "1.2rem" },
-                      lineHeight: { xs: "1.2rem", md: "1.4rem" },
-                      letterSpacing: "-0.6px",
-                    }}
-                  >
-                    {item.name}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      fontSize: { xs: "0.7rem", md: "0.9rem" },
-                      letterSpacing: "-0.4px",
-                      marginTop: '-10px'
-                    }}
-                  >
-                    {item.description}
-                  </Typography>
-                </ListItem>
+                <ProductCard key={index} product={item} />
               ))
             ) : (
               <Typography

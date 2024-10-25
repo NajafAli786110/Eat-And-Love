@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, Button, IconButton, Typography, keyframes } from "@mui/material";
 import { Close, Add, Remove } from "@mui/icons-material";
 import { IoBagCheckOutline } from "react-icons/io5";
-import { CartData } from "../../appConstantData/ProductsData";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const slideInFromRight = keyframes`
   0% {
@@ -27,13 +27,14 @@ const slideOutToRight = keyframes`
   }
 `;
 
-const totalPrice = CartData.reduce(
-  (acc, item) => acc + item.price * item.quantity,
-  0
-);
-
 const CartPopup = ({ setIsCartOpen }) => {
+  const CartData = useSelector((state) => state.cart);
   const [isClose, setIsClose] = useState(true);
+
+  const totalPrice = CartData.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   // Cart Close
   const closeCartPopup = () => {

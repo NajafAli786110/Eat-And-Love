@@ -7,13 +7,9 @@ export default function Shop() {
   const [searchQuery, setSearchQuery] = useState("");
   // Styling for Grid
   const styleGrid = {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, auto)",
+    display: "flex",
+    flexWrap: "wrap",
     gap: "16px",
-    "@media (max-width: 600px)": {
-      gridTemplateColumns: "repeat(2, 1fr)",
-      gap: "6px",
-    },
   };
 
   // Filter Products by Category
@@ -142,10 +138,8 @@ export default function Shop() {
           >
             <Box
               sx={{
-                display: "grid",
-                gridTemplateColumns: styleGrid,
-                gap: "20px",
-                width: "100%",
+                display: "flex",
+                flexWrap: styleGrid,
               }}
             >
               {filterProducts.length > 0 ? (

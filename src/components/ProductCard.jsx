@@ -1,7 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React from "react";
+import { CiShoppingCart } from "react-icons/ci";
+import { useDispatch } from "react-redux";
+import { add_cart } from "../features/reducers/CartReducer";
 
 const ProductCard = ({ product }) => {
+  const dispath = useDispatch();
+
   return (
     <Box
       sx={{
@@ -9,7 +14,7 @@ const ProductCard = ({ product }) => {
         borderRadius: "8px",
         overflow: "hidden",
         textAlign: "center",
-        width: {xs: '170px', md: '280px'}
+        width: { xs: "46%", md: "23%" },
       }}
     >
       <img
@@ -43,13 +48,36 @@ const ProductCard = ({ product }) => {
         <Typography
           variant="body2"
           sx={{
-            fontSize: { xs: "0.7rem", md: "0.9rem" },
+            fontSize: { xs: "0.6rem", md: "0.7rem" },
             letterSpacing: "-0.4px",
           }}
           color="text.secondary"
         >
           {product.description}
         </Typography>
+        <Button
+          variant="contained"
+          sx={{
+            fontSize: "14px",
+            fontWeight: "300",
+            backgroundColor: "var(--secondary-color)",
+            borderRadius: "20px",
+            textTransform: "capitalize",
+            display: { xs: "none", sm: "flex" },
+          }}
+          endIcon={<CiShoppingCart />}
+          onClick={() =>
+            dispath(
+              add_cart({
+                name: product.name,
+                imageUrl: product.imageUrl,
+                price: product.price,
+              })
+            )
+          }
+        >
+          Add to Cart
+        </Button>
       </Box>
     </Box>
   );

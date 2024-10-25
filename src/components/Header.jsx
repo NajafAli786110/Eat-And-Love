@@ -15,7 +15,7 @@ import { Search, ShoppingCart, Login, Menu } from "@mui/icons-material";
 import MobileMenuPopup from "./MobileMenuPopup";
 import SearchBarPopup from "./SearchBarPopup";
 import CartPopup from "./cart/CartPopup";
-import { CartData } from "../appConstantData/ProductsData";
+import { useSelector } from "react-redux";
 
 // Demo Data
 const pages = [
@@ -26,6 +26,7 @@ const pages = [
 ];
 
 const Header = () => {
+  const CartData = useSelector((state)=> state.cart);
   const locationTrack = useLocation();
   const [mblMenuOpen, setMblMenuOpen] = React.useState(false);
   const [isOpenSearch, setIsOpenSearch] = React.useState(false);
@@ -55,6 +56,7 @@ const Header = () => {
                 width: "100%",
               }}
             >
+              {/* Image */}
               <Link to="/">
                 <Box
                   component="img"
@@ -107,11 +109,11 @@ const Header = () => {
                 </List>
 
                 {/* Icons */}
-                <Box sx={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                <Box sx={{ display: "flex", gap: "8px", alignItems: "center", justifyContent: 'end' }}>
                   {/* Search Icon */}
                   <Button
                     onClick={() => setIsOpenSearch(true)}
-                    sx={{ minWidth: { xs: "18px", sm: "25px" } }}
+                    sx={{ minWidth: { xs: "18px", sm: "25px" }, padding: '0px' }}
                   >
                     <Search
                       sx={{
@@ -122,7 +124,7 @@ const Header = () => {
                   </Button>
 
                   {/* Cart Icon */}
-                  <Box sx={{ mb: "-5px" }}>
+                  <Box sx={{ mb: {xs: "0px", md: "-5px"} }}>
                     <Button
                       sx={{
                         minWidth: { xs: "18px", sm: "25px" },
