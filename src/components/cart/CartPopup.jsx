@@ -3,7 +3,8 @@ import { Box, Button, IconButton, Typography, keyframes } from "@mui/material";
 import { Close, Add, Remove } from "@mui/icons-material";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { add_quantity, minus_quantity, remove_cart } from "../../features/reducers/CartReducer";
 
 const slideInFromRight = keyframes`
   0% {
@@ -28,6 +29,7 @@ const slideOutToRight = keyframes`
 `;
 
 const CartPopup = ({ setIsCartOpen }) => {
+  const dispatch = useDispatch();
   const CartData = useSelector((state) => state.cart);
   const [isClose, setIsClose] = useState(true);
 
@@ -136,16 +138,16 @@ const CartPopup = ({ setIsCartOpen }) => {
 
                 {/* Action Icons */}
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <IconButton>
+                  <IconButton onClick={()=> dispatch(minus_quantity({id: item.id}))}>
                     <Remove />
                   </IconButton>
                   <Typography color="var(--white-full)">
                     {item.quantity}
                   </Typography>
-                  <IconButton>
+                  <IconButton onClick={()=> dispatch(add_quantity({id: item.id}))}>
                     <Add />
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={()=> dispatch(remove_cart({id: item.id}))}>
                     <Close />
                   </IconButton>
                 </Box>
