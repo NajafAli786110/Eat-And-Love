@@ -63,7 +63,6 @@ const ProductCard = ({ product }) => {
             backgroundColor: "var(--secondary-color)",
             borderRadius: "20px",
             textTransform: "capitalize",
-            display: { xs: "none", sm: "flex" },
           }}
           endIcon={<CiShoppingCart />}
           onClick={() =>

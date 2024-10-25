@@ -71,7 +71,7 @@ const Header = () => {
                   display: "flex",
                   justifyContent: "end",
                   alignItems: "center",
-                  gap: "20px",
+                  gap: {xs: "8px", md: "20px"},
                 }}
               >
                 {/* Navigation List */}
@@ -181,12 +181,15 @@ const Header = () => {
                 >
                   <Button
                     variant="contained"
-                    startIcon={<Login />}
+                    startIcon={<Login sx={{
+                      fontSize: {xs: '8px', md: '16px'},
+                    }} />}
                     sx={{
                       backgroundColor: "var(--secondary-color)",
-                      borderRadius: "20px",
+                      borderRadius: "100px",
                       textTransform: "capitalize",
-                      display: { xs: "none", sm: "flex" },
+                      padding: {xs: '4px 12px', md: '8px 16px'},
+                      fontSize: {xs: '12px', md: '16px'},
                     }}
                   >
                     Login

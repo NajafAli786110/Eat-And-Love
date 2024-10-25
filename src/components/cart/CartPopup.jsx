@@ -71,6 +71,7 @@ const CartPopup = ({ setIsCartOpen }) => {
       <Box
         sx={{
           width: { xs: "85%", sm: "30%" },
+          minHeight: '100vh',
           padding: "20px",
           display: "flex",
           flexDirection: "column",
