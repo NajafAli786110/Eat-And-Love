@@ -28,8 +28,9 @@ const LatestProducts = () => {
       </Typography>
       <Box
         sx={{
-          display: "flex",
-          flexWrap: styleGrid,
+          display: "grid",
+          gridTemplateColumns: {xs: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)'},
+          gap: '8px',
         }}
       >
         {OurProducts.map((product, index) => (

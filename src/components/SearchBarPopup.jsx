@@ -139,12 +139,12 @@ const SearchBarPopup = ({ setIsOpenSearch }) => {
         >
           <List
             sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItem: "center",
-              justifyContent: "space-between",
-              gap: "16px",
-              width: '100%',
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "repeat(2, 1fr)",
+                md: "repeat(3, 1fr)",
+              },
+              gap: '8px',
             }}
           >
             {filterProductByQuery.length > 0 ? (

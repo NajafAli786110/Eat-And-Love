@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import { InnerPageBanner, ProductCard } from "../components";
 import { Container, Box, Typography, List } from "@mui/material";
-import { ProductsData } from "../appConstantData/ProductsData";
+import { useSelector } from "react-redux";
 
 export default function Shop() {
+  const ProductsData = useSelector((state)=> state.products)
   const [searchQuery, setSearchQuery] = useState("");
-  // Styling for Grid
-  const styleGrid = {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "16px",
-  };
 
   // Filter Products by Category
   let filterProducts = ProductsData.filter((products) =>
     products.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  filterProducts = filterProducts.slice(0,6);
 
   const uniqueCategories = [
     ...new Map(
@@ -138,8 +135,12 @@ export default function Shop() {
           >
             <Box
               sx={{
-                display: "flex",
-                flexWrap: styleGrid,
+                display: "grid",
+                gridTemplateColumns: {
+                  xs: "repeat(2, 1fr)",
+                  md: "repeat(3, 1fr)",
+                },
+                gap: "8px",
               }}
             >
               {filterProducts.length > 0 ? (

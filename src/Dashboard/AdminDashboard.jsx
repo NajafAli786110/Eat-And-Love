@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useState } from "react";
+import { Box } from "@mui/material";
+import { SideBarAdmin, ContentAdmin } from "../components/dashboard";
+import { DashboardAdmin } from "../components/dashboard/admin/content/AdminContent";
 
-export default function AdminDashboard() {
+const AdminDashboard = () => {
+  const [currentTab, setCurrentTab] = useState(<DashboardAdmin />);
+
   return (
-    <div>AdminDashboard</div>
-  )
-}
+    <Box sx={{ display: "flex", flexDirection: {xs: 'column', md: 'row'} }}>
+      <SideBarAdmin onTabChange={setCurrentTab} />
+      <ContentAdmin currentTab={currentTab} />
+    </Box>
+  );
+};
+
+export default AdminDashboard;

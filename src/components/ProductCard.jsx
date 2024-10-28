@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
         borderRadius: "8px",
         overflow: "hidden",
         textAlign: "center",
-        width: { xs: "46%", md: "23%" },
+        width: '100%',
       }}
     >
       <img
