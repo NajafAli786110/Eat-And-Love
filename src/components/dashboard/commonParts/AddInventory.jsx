@@ -30,9 +30,6 @@ const AddInventory = () => {
         marginTop: "32px",
       }}
     >
-      <Typography variant="h4" fontWeight="600" marginBottom="24px">
-        Add New Product
-      </Typography>
       <Box
         component="form"
         sx={{

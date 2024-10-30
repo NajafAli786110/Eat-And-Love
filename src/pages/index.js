@@ -2,6 +2,7 @@ import About from "./About";
 import Cart from "./Cart";
 import Checkout from "./Checkout";
 import Contact from "./Contact";
+import Dashboard from "./Dashboard";
 import Homepage from "./Homepage";
 import Login from "./Login";
 import Shop from "./Shop";
@@ -18,4 +19,5 @@ export {
     SingleProduct,
     Login,
     Signup,
+    Dashboard,
 }

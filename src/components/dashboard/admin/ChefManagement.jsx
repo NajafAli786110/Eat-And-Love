@@ -11,6 +11,7 @@ import {
   Avatar,
   IconButton,
   Paper,
+  Box,
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -32,14 +33,10 @@ const ChefManagement = () => {
       email: "maria@example.com",
       imageUrl: "https://via.placeholder.com/60",
     },
-    // Add more demo data as needed
   ];
 
   return (
-    <Container maxWidth="md" sx={{ marginTop: "32px" }}>
-      <Typography variant="h4" fontWeight="600" marginBottom="24px">
-        Chef Management
-      </Typography>
+    <Box sx={{ marginTop: "32px" }}>
       <TableContainer
         component={Paper}
         sx={{ boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)" }}
@@ -79,7 +76,7 @@ const ChefManagement = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </Container>
+    </Box>
   );
 };
 

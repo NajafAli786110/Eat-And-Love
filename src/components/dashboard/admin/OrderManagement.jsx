@@ -73,10 +73,7 @@ const OrderManagement = () => {
   ];
 
   return (
-    <Box sx={{ padding: "24px" }}>
-      <Typography variant="h4" sx={{ fontWeight: "600", marginBottom: "24px" }}>
-        Order Management
-      </Typography>
+    <Box sx={{ padding: "24px 0px" }}>
 
       <TableContainer component={Paper} sx={{ borderRadius: "16px" }}>
         <Table>

@@ -1,10 +1,11 @@
 import { LoginOutlined } from "@mui/icons-material";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { UserData } from "../appConstantData/UserData";
 
 const Login = () => {
+  const UserData = useSelector((state)=>state.users);
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     username: "",

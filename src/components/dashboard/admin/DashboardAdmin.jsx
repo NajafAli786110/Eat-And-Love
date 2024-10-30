@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-import ProductCard from "../../../ProductCard";
+import ProductCard from "../../ProductCard";
 
 const DashboardAdmin = () => {
   const ourStocks = useSelector((state) => state.products);

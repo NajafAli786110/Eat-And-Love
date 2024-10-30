@@ -31,18 +31,7 @@ const AttendenceReport = () => {
   ];
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, p: 3 }}>
-      <Box sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <Typography variant="h5">Attendance History</Typography>
-        <Button variant="outlined" color="secondary" size="small">
-          Mark as Attendence
-        </Button>
-      </Box>
-
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, p: '3 0' }}>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -81,6 +70,17 @@ const AttendenceReport = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "end",
+          alignItems: "center",
+        }}
+      >
+        <Button variant="outlined" color="secondary" size="small">
+          Mark as Attendence
+        </Button>
+      </Box>
     </Box>
   );
 };

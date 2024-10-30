@@ -10,11 +10,11 @@ import {
   Paper,
 } from "@mui/material";
 
-const ProfileChef = () => {
+const Profile = () => {
   return (
-    <Container sx={{ marginTop: "32px" }}>
+    <Box sx={{ marginTop: "32px" }}>
       <Paper elevation={3} sx={{ padding: "24px", borderRadius: "16px" }}>
-        {/* ProfileChef Picture Section */}
+        {/* Profile Picture Section */}
         <Box
           display="flex"
           alignItems="center"
@@ -24,10 +24,10 @@ const ProfileChef = () => {
           <Box display="flex" alignItems="center" gap="16px">
             <Avatar
               src="https://via.placeholder.com/120"
-              alt="ProfileChef Picture"
+              alt="Profile Picture"
               sx={{ width: 120, height: 120 }}
             />
-            <Typography variant="h5">ProfileChef Picture</Typography>
+            <Typography variant="h5">Profile Picture</Typography>
           </Box>
           <Button variant="outlined" color="success">
             Upload Image
@@ -83,8 +83,8 @@ const ProfileChef = () => {
           </Grid>
         </Grid>
       </Paper>
-    </Container>
+    </Box>
   );
 };
 
-export default ProfileChef;
+export default Profile;

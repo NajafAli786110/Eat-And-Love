@@ -37,9 +37,6 @@ const OrderHistory = () => {
 
   return (
     <Paper sx={{ padding: "24px", borderRadius: "16px" }}>
-      <Typography variant="h6" sx={{ marginBottom: "16px", fontWeight: "600" }}>
-        Order History
-      </Typography>
       <TableContainer>
         <Table>
           <TableHead>

@@ -1,15 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { CartReducer, ProductReducer, AdminDashboardReducer, OwnerDashboardReducer, ChefDashboardReducer, UserDashboardReducer } from "./features/reducers";
+import { CartReducer, ProductReducer, UserReducers } from "./features/reducers";
 
 
 
 const rootReducers = combineReducers({
   products: ProductReducer,
   cart: CartReducer,
-  // adminDashboard: AdminDashboardReducer,
-  // ownerDashboard: OwnerDashboardReducer,
-  // chefDashboard: ChefDashboardReducer,
-  // userDashboard: UserDashboardReducer,
+  users: UserReducers,
 })
 
 

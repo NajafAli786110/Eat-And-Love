@@ -12,9 +12,12 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { UserData } from "../appConstantData/UserData";
+import { useDispatch, useSelector } from "react-redux";
+import { add_user } from "../features/reducers/UserReducers";
 
 const Signup = () => {
+  const UserData = useSelector((state)=>state.users);
+  const dispatch = useDispatch();
   const [signUpData, setSignUpData] = useState({
     fullName: "",
     username: "",
@@ -58,16 +61,25 @@ const Signup = () => {
 
   // onSignUpHandler
   const onSignUpHandler = () => {
+
+    // Log My Data before
     console.log(UserData);
-    UserData.push({
-      id: Math.random(),
-      name: signUpData.fullName,
-      email: signUpData.userEmail,
-      role: signUpData.userRole,
-      username: signUpData.username,
-      password: signUpData.password,
-    });
+
+    // Give to Globals State
+    dispatch(
+      add_user({
+        name: signUpData.fullName,
+        email: signUpData.userEmail,
+        role: signUpData.userRole,
+        username: signUpData.username,
+        password: signUpData.password,
+      })
+    );
+
+    // Log My Data after
     console.log(UserData);
+
+    // Blank the form
     setSignUpData({
       fullName: "",
       username: "",
@@ -151,10 +163,9 @@ const Signup = () => {
               label="User Role"
               onChange={handleRoleChange}
             >
-              <MenuItem value="admin">Admin</MenuItem>
-              <MenuItem value="chef">Chef</MenuItem>
-              <MenuItem value="hotelOwner">Hotel Owner</MenuItem>
-              <MenuItem value="user">User</MenuItem>
+              <MenuItem value="admin">admin</MenuItem>
+              <MenuItem value="chef">chef</MenuItem>
+              <MenuItem value="user">user</MenuItem>
             </Select>
           </FormControl>
           <TextField
