@@ -14,10 +14,14 @@ import {
   SuggestRecipe,
 } from "../components/dashboard/DashboardContent";
 import { Link } from "react-router-dom";
-let userrole = "chef";
-let SidebarTabs = [];
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
+  const loginStatus = useSelector((state) => state.users.loggedInStatus);
+  console.log(loginStatus.userRole);
+  
+  let userrole = "admin";
+  let SidebarTabs = [];
   // Check The Current User
   switch (userrole) {
     case "admin":

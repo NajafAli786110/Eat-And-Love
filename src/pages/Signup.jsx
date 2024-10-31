@@ -14,9 +14,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { add_user } from "../features/reducers/UserReducers";
+import { showAlert } from "../features/reducers/AlertPopupReducer";
 
 const Signup = () => {
-  const UserData = useSelector((state)=>state.users);
+  const UserData = useSelector((state) => state.users.UserData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [signUpData, setSignUpData] = useState({
@@ -62,7 +63,6 @@ const Signup = () => {
 
   // onSignUpHandler
   const onSignUpHandler = () => {
-
     // Give to Globals State
     dispatch(
       add_user({
@@ -74,7 +74,18 @@ const Signup = () => {
       })
     );
 
-    navigate('/login');
+    // Sucees message Show karwao
+    dispatch(
+      showAlert({
+        message: `${signUpData.fullName}, You're logged in successfully! Welcome back!`,
+        type: "success",
+      })
+    );
+
+    // 1.2 sec baad navigate karwao
+    setTimeout(() => {
+      navigate("/login");
+    }, 1200);
 
     // Blank the form
     setSignUpData({

@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { UserData } from "../../appConstantData/UserData";
 
-const initialStates = UserData;
+const initialStates = {
+  userData: UserData,
+  loggedInStatus: {
+    isLoggedIn: false,
+    currentUser: null,
+    userRole: null,
+  },
+};
 
 const UserReducers = createSlice({
   name: "userReducers",
@@ -10,16 +17,33 @@ const UserReducers = createSlice({
     add_user: (state, action) => {
       const newUser = {
         id: Math.random(),
-        name: action.payload.name,
-        email: action.payload.email,
-        role: action.payload.role,
-        username: action.payload.username,
-        password: action.payload.password,
+        ...action.payload,
       };
-      state.push(newUser);
+      state.userData.push(newUser);
+    },
+    login_user: (state, action) => {
+      const { username, password } = action.payload;
+      const foundUser = state.userData.find(
+        (user) => user.username === username && user.password === password
+      );
+
+      if (foundUser) {
+        state.loggedInStatus = {
+          isLoggedIn: true,
+          currentUser: foundUser,
+          userRole: foundUser.role,
+        };
+      }
+    },
+    logout_user: (state) => {
+      state.loggedInStatus = {
+        isLoggedIn: false,
+        currentUser: null,
+        userRole: null,
+      };
     },
   },
 });
 
-export const { add_user } = UserReducers.actions;
+export const { add_user, login_user, logout_user } = UserReducers.actions;
 export default UserReducers.reducer;

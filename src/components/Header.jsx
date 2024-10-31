@@ -17,7 +17,6 @@ import CartPopup from "./popups/CartPopup";
 import { useSelector } from "react-redux";
 import SearchBarPopup from "./popups/SearchBarPopup";
 
-// Demo Data
 const pages = [
   { name: "Home", link: "/" },
   { name: "Our Menus", link: "/shop" },
@@ -27,6 +26,9 @@ const pages = [
 
 const Header = () => {
   const CartData = useSelector((state)=> state.cart);
+  const loginStatus = useSelector((state)=> state.users.loggedInStatus);  
+  console.log(loginStatus.userRole);
+  
   const locationTrack = useLocation();
   const [mblMenuOpen, setMblMenuOpen] = React.useState(false);
   const [isOpenSearch, setIsOpenSearch] = React.useState(false);

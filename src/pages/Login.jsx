@@ -1,11 +1,15 @@
 import { LoginOutlined } from "@mui/icons-material";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { showAlert } from "../features/reducers/AlertPopupReducer";
+import { login_user } from "../features/reducers/UserReducers";
 
 const Login = () => {
-  const UserData = useSelector((state) => state.users);
+  const UserData = useSelector((state) => state.users.UserData);
+  const loginStatus = useSelector((state) => state.users.loggedInStatus);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     username: "",
@@ -20,30 +24,52 @@ const Login = () => {
   };
 
   const LoginDataHandler = () => {
-    const userFound = UserData.some(
-      (item) =>
-        item.username === loginData.username &&
-        item.password === loginData.password
+    // const loggedInUser = UserData.find(
+    //   (item) =>
+    //     item.username === loginData.username &&
+    //     item.password === loginData.password
+    // );
+
+    dispatch(
+      login_user({
+        username: loginData.username,
+        password: loginData.password,
+      })
     );
 
-    if (userFound) {
-      const loggedInUser = UserData.find(
-        (item) =>
-          item.username === loginData.username &&
-          item.password === loginData.password
+    // Agar User Logged in Hogaya
+    if (loginStatus.isLoggedIn) {
+      // Sucees message Show karwao
+      dispatch(
+        showAlert({
+          message: `You're logged in successfully! Welcome back!`,
+          type: "success",
+        })
       );
-      alert(
-        `${loggedInUser.name}, you're logged in successfully! Welcome back!`
-      );
-      navigate("/");
+
+      // 1.2 sec baad navigate karwao
+      setTimeout(() => {
+        navigate("/");
+      }, 1200);
+
+      // Form ko Blank Karo (Edge Case)
       setLoginData({
         username: "",
         password: "",
       });
-    } else {
-      alert("Incorrect Email Or Password");
+    }
+
+    // Agar User Logged in na Ho paya
+    else {
+      dispatch(
+        showAlert({
+          message: "Incorrect Email Or Password",
+          type: "error",
+        })
+      );
     }
   };
+
   return (
     <Container
       sx={{
