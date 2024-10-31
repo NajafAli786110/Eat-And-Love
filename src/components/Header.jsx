@@ -12,10 +12,10 @@ import {
   Typography,
 } from "@mui/material";
 import { Search, ShoppingCart, Login, Menu } from "@mui/icons-material";
-import MobileMenuPopup from "./MobileMenuPopup";
-import SearchBarPopup from "./SearchBarPopup";
-import CartPopup from "./cart/CartPopup";
+import MobileMenuPopup from "./popups/MobileMenuPopup";
+import CartPopup from "./popups/CartPopup";
 import { useSelector } from "react-redux";
+import SearchBarPopup from "./popups/SearchBarPopup";
 
 // Demo Data
 const pages = [

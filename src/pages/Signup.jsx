@@ -11,13 +11,14 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { add_user } from "../features/reducers/UserReducers";
 
 const Signup = () => {
   const UserData = useSelector((state)=>state.users);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [signUpData, setSignUpData] = useState({
     fullName: "",
     username: "",
@@ -62,9 +63,6 @@ const Signup = () => {
   // onSignUpHandler
   const onSignUpHandler = () => {
 
-    // Log My Data before
-    console.log(UserData);
-
     // Give to Globals State
     dispatch(
       add_user({
@@ -76,8 +74,7 @@ const Signup = () => {
       })
     );
 
-    // Log My Data after
-    console.log(UserData);
+    navigate('/login');
 
     // Blank the form
     setSignUpData({

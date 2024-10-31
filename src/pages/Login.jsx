@@ -5,14 +5,12 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const UserData = useSelector((state)=>state.users);
+  const UserData = useSelector((state) => state.users);
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
   });
-
-  let userRole = "";
 
   const onChangeHandler = (e) => {
     setLoginData({
@@ -22,22 +20,29 @@ const Login = () => {
   };
 
   const LoginDataHandler = () => {
-    UserData.map((item) => {
-      if (
+    const userFound = UserData.some(
+      (item) =>
         item.username === loginData.username &&
         item.password === loginData.password
-      ) {
-        userRole = item.role;
-        console.log(userRole);
-        alert(`${item.name} You're Login Successfully!.. Welcome Back Bro`);
-        navigate("/");
-      }
-    });
-    alert("Incorrect Email Or Password");
-    setLoginData({
-      username: "",
-      password: "",
-    });
+    );
+
+    if (userFound) {
+      const loggedInUser = UserData.find(
+        (item) =>
+          item.username === loginData.username &&
+          item.password === loginData.password
+      );
+      alert(
+        `${loggedInUser.name}, you're logged in successfully! Welcome back!`
+      );
+      navigate("/");
+      setLoginData({
+        username: "",
+        password: "",
+      });
+    } else {
+      alert("Incorrect Email Or Password");
+    }
   };
   return (
     <Container

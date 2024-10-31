@@ -8,8 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import ProductCard from "./ProductCard";
 import { useSelector } from "react-redux";
+import ProductCard from "../ProductCard";
 
 const SearchBarPopup = ({ setIsOpenSearch }) => {
   const ProductsData = useSelector((state) => state.products);

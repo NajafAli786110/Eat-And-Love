@@ -3,9 +3,10 @@ import React from "react";
 import { CiShoppingCart } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { add_cart } from "../features/reducers/CartReducer";
+import { showAlert } from "../features/reducers/AlertPopupReducer";
 
 const ProductCard = ({ product }) => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   return (
     <Box
@@ -14,7 +15,7 @@ const ProductCard = ({ product }) => {
         borderRadius: "8px",
         overflow: "hidden",
         textAlign: "center",
-        width: '100%',
+        width: "100%",
       }}
     >
       <img
@@ -65,15 +66,21 @@ const ProductCard = ({ product }) => {
             textTransform: "capitalize",
           }}
           endIcon={<CiShoppingCart />}
-          onClick={() =>
-            dispath(
+          onClick={() => {
+            dispatch(
               add_cart({
                 name: product.name,
                 imageUrl: product.imageUrl,
                 price: product.price,
               })
-            )
-          }
+            );
+            dispatch(
+              showAlert({
+                message: "Added Items to Cart Successfully",
+                type: "success",
+              })
+            );
+          }}
         >
           Add to Cart
         </Button>
