@@ -9,16 +9,19 @@ import {
   ListItemText,
 } from "@mui/material";
 import { IoBagCheckOutline } from "react-icons/io5";
-import { CartData } from "../appConstantData/ProductsData";
-import { useState } from "react";
-
-const totalPrice = CartData.reduce(
-  (acc, item) => acc + item.price * item.quantity,
-  0
-);
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addAmount } from "../features/reducers/dashboardActions/AdminReducer";
+import { empty_cart } from "../features/reducers/CartReducer";
+import { useNavigate } from "react-router-dom";
+import { showAlert } from "../features/reducers/AlertPopupReducer";
 
 const Checkout = () => {
-  // checkoutData
+
+
+  // Varibales | Initialization
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [checkoutData, setCheckoutData] = useState({
     fullName: "",
     email: "",
@@ -27,7 +30,25 @@ const Checkout = () => {
     postCode: "",
     country: "",
   });
+  const adminDashboardData = useSelector(
+    (state) => state.adminReducer.dashboard
+  );
+  const CartData = useSelector((state) => state.cart);
+  let totalPrice = CartData.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
+
+  // Functionalities
+
+  // Edge Cases || If there'has no item in cart navigate to Shop
+  useEffect(()=>{
+    if (CartData.length==0) {
+      navigate('/shop');
+      dispatch(showAlert({message: 'Put your favorites in your Bag', type: 'success'}));
+    }
+  },[])
   // onChange Handler
   const onChangeHandler = (e) => {
     setCheckoutData({
@@ -38,6 +59,9 @@ const Checkout = () => {
 
   const onSubmitHandler = () => {
     console.log(checkoutData);
+    dispatch(addAmount({ totalEarning: totalPrice }));
+    dispatch(empty_cart());
+    totalPrice = 0;
     setCheckoutData({
       fullName: "",
       email: "",
@@ -174,63 +198,73 @@ const Checkout = () => {
             padding: "0px",
           }}
         >
-          {CartData.map((item) => (
-            <ListItem
-              key={item.id}
-              sx={{
-                padding: "10px 0px",
-              }}
-            >
-              <img
-                src={item.imageUrl}
-                alt={item.name}
-                style={{
-                  height: "40px",
-                  width: "40px",
-                  objectFit: "cover",
-                  borderRadius: "100px",
-                  marginRight: "10px",
+          {CartData.length > 0 ? (
+            <>
+              {CartData.map((item) => (
+                <ListItem
+                  key={item.id}
+                  sx={{
+                    padding: "10px 0px",
+                  }}
+                >
+                  <img
+                    src={item.imageUrl}
+                    alt={item.name}
+                    style={{
+                      height: "40px",
+                      width: "40px",
+                      objectFit: "cover",
+                      borderRadius: "100px",
+                      marginRight: "10px",
+                    }}
+                  />
+                  <ListItemText
+                    primary={`${item.name} x ${item.quantity}`}
+                    secondary={`$${item.price.toFixed(2)} each`}
+                  />
+                  <Typography>
+                    ${item.price.toFixed(2) * item.quantity}
+                  </Typography>
+                </ListItem>
+              ))}
+
+
+              <Divider sx={{ my: 2, backgroundColor: "var(--white-full)" }} />
+
+
+              {/* Total Amount */}
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginTop: "10px",
                 }}
-              />
-              <ListItemText
-                primary={`${item.name} x ${item.quantity}`}
-                secondary={`$${item.price.toFixed(2)} each`}
-              />
-              <Typography>${item.price.toFixed(2) * item.quantity}</Typography>
-            </ListItem>
-          ))}
+              >
+                <Typography variant="h6">Total</Typography>
+                <Typography variant="h6">${totalPrice.toFixed(2)}</Typography>
+              </Box>
+
+              {/* Checkout Button */}
+              <Button
+                variant="contained"
+                startIcon={<IoBagCheckOutline />}
+                fullWidth
+                sx={{
+                  backgroundColor: "var(--primary-color)",
+                  borderRadius: "50px",
+                  textTransform: "capitalize",
+                  padding: "12px",
+                  marginTop: "20px",
+                }}
+                onClick={onSubmitHandler}
+              >
+                Complete Purchase
+              </Button>
+            </>
+          ) : (
+            <Typography>No Items Found!</Typography>
+          )}
         </List>
-
-        <Divider sx={{ my: 2, backgroundColor: "var(--white-full)" }} />
-
-        {/* Total Amount */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: "10px",
-          }}
-        >
-          <Typography variant="h6">Total</Typography>
-          <Typography variant="h6">${totalPrice.toFixed(2)}</Typography>
-        </Box>
-
-        {/* Checkout Button */}
-        <Button
-          variant="contained"
-          startIcon={<IoBagCheckOutline />}
-          fullWidth
-          sx={{
-            backgroundColor: "var(--primary-color)",
-            borderRadius: "50px",
-            textTransform: "capitalize",
-            padding: "12px",
-            marginTop: "20px",
-          }}
-          onClick={onSubmitHandler}
-        >
-          Complete Purchase
-        </Button>
       </Box>
     </Box>
   );

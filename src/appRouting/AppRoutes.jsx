@@ -2,7 +2,6 @@ import { Routes, Route, BrowserRouter, Outlet } from "react-router-dom";
 import {
   About,
   Homepage,
-  Cart,
   Contact,
   Checkout,
   SingleProduct,
@@ -25,7 +24,6 @@ function AppRoutes() {
           <Route path="/" element={<Homepage />} />
           <Route path="/about-us" element={<About />} />
           <Route path="/contact-us" element={<Contact />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/product" element={<SingleProduct />} />

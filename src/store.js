@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { CartReducer, ProductReducer, UserReducers, AlertPopupReducer } from "./features/reducers";
+import { CartReducer, ProductReducer, UserReducers, AlertPopupReducer, AdminReducer } from "./features/reducers";
 
 
 
@@ -8,6 +8,7 @@ const rootReducers = combineReducers({
   cart: CartReducer,
   users: UserReducers,
   AlertReducer: AlertPopupReducer,
+  adminReducer: AdminReducer,
 })
 
 

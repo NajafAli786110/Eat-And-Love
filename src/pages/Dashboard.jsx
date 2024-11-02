@@ -25,12 +25,12 @@ const Dashboard = () => {
   let userrole = loginStatus.userRole;
 
   // Edge Case || If user jump to Dashboard without login as a guest so its redirect to login
-  useEffect(() => {
-    if (!loginStatus.isLoggedIn) {
-      dispatch(showAlert({message: 'Please Login First Then Comes to Dashboard', type: 'error'}))
-      navigate("/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!loginStatus.isLoggedIn) {
+  //     dispatch(showAlert({message: 'Please Login First Then Comes to Dashboard', type: 'error'}))
+  //     navigate("/login");
+  //   }
+  // }, []);
   let SidebarTabs = [];
 
   // Check The Current User

@@ -167,7 +167,7 @@ const Header = () => {
                           right: -5,
                         }}
                       >
-                        {CartData.length}
+                        {CartData.length > 0 ? CartData.length : 0}
                       </Typography>
                     </Button>
                   </Box>

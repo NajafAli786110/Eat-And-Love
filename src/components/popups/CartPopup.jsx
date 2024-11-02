@@ -4,7 +4,11 @@ import { Close, Add, Remove } from "@mui/icons-material";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { add_quantity, minus_quantity, remove_cart } from "../../features/reducers/CartReducer";
+import {
+  add_quantity,
+  minus_quantity,
+  remove_cart,
+} from "../../features/reducers/CartReducer";
 
 const slideInFromRight = keyframes`
   0% {
@@ -71,7 +75,7 @@ const CartPopup = ({ setIsCartOpen }) => {
       <Box
         sx={{
           width: { xs: "85%", sm: "30%" },
-          minHeight: '100vh',
+          minHeight: "100vh",
           padding: "20px",
           display: "flex",
           flexDirection: "column",
@@ -103,57 +107,90 @@ const CartPopup = ({ setIsCartOpen }) => {
         {/* Cart Items */}
         <Box>
           {CartData.length > 0 ? (
-            CartData.map((item) => (
-              <Box
-                key={item.id}
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: "15px",
-                  padding: "10px",
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  borderRadius: "8px",
-                }}
-              >
-                {/* Image And Product Name */}
+            <>
+              {CartData.map((item) => (
                 <Box
+                  key={item.id}
                   sx={{
                     display: "flex",
-                    gap: "8px",
+                    justifyContent: "space-between",
                     alignItems: "center",
+                    marginBottom: "15px",
+                    padding: "10px",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    borderRadius: "8px",
                   }}
                 >
-                  <img
-                    src={item.imageUrl}
-                    alt={item.name}
-                    width="30px"
-                    height="30px"
-                    style={{
-                      borderRadius: "50px",
-                      objectFit: "cover",
+                  {/* Image And Product Name */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: "8px",
+                      alignItems: "center",
                     }}
-                  />
-                  <Typography color="var(--white-full)">{item.name}</Typography>
-                </Box>
+                  >
+                    <img
+                      src={item.imageUrl}
+                      alt={item.name}
+                      width="30px"
+                      height="30px"
+                      style={{
+                        borderRadius: "50px",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <Typography color="var(--white-full)">
+                      {item.name}
+                    </Typography>
+                  </Box>
 
-                {/* Action Icons */}
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <IconButton onClick={()=> dispatch(minus_quantity({id: item.id}))}>
-                    <Remove />
-                  </IconButton>
-                  <Typography color="var(--white-full)">
-                    {item.quantity}
-                  </Typography>
-                  <IconButton onClick={()=> dispatch(add_quantity({id: item.id}))}>
-                    <Add />
-                  </IconButton>
-                  <IconButton onClick={()=> dispatch(remove_cart({id: item.id}))}>
-                    <Close />
-                  </IconButton>
+                  {/* Action Icons */}
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <IconButton
+                      onClick={() => dispatch(minus_quantity({ id: item.id }))}
+                    >
+                      <Remove />
+                    </IconButton>
+                    <Typography color="var(--white-full)">
+                      {item.quantity}
+                    </Typography>
+                    <IconButton
+                      onClick={() => dispatch(add_quantity({ id: item.id }))}
+                    >
+                      <Add />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => dispatch(remove_cart({ id: item.id }))}
+                    >
+                      <Close />
+                    </IconButton>
+                  </Box>
                 </Box>
-              </Box>
-            ))
+              ))}
+              {/* Checkout Button */}
+              <Link
+                to="/checkout"
+                style={{
+                  width: "100%",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  startIcon={<IoBagCheckOutline />}
+                  sx={{
+                    backgroundColor: "var(--primary-color)",
+                    borderRadius: "100px",
+                    textTransform: "capitalize",
+                    padding: "6px 24px",
+                    marginTop: "20px",
+                    width: "100%",
+                  }}
+                  onClick={closeCartPopup}
+                >
+                  Checkout
+                </Button>
+              </Link>
+            </>
           ) : (
             <Typography color="var(--white-full)">
               Your cart is empty.
@@ -188,30 +225,6 @@ const CartPopup = ({ setIsCartOpen }) => {
             ${totalPrice}
           </Typography>
         </Box>
-
-        {/* Checkout Button */}
-        <Link
-          to="/checkout"
-          style={{
-            width: "100%",
-          }}
-        >
-          <Button
-            variant="contained"
-            startIcon={<IoBagCheckOutline />}
-            sx={{
-              backgroundColor: "var(--primary-color)",
-              borderRadius: "100px",
-              textTransform: "capitalize",
-              padding: "6px 24px",
-              marginTop: "20px",
-              width: "100%",
-            }}
-            onClick={closeCartPopup}
-          >
-            Checkout
-          </Button>
-        </Link>
       </Box>
     </Box>
   );

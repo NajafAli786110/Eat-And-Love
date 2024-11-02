@@ -4,31 +4,33 @@ import ProductCard from "../../ProductCard";
 
 const DashboardAdmin = () => {
   const ourStocks = useSelector((state) => state.products);
+  const adminDashboardData = useSelector(
+    (state) => state.adminReducer.dashboard
+  );
   const limitedProducts = ourStocks.slice(0, 6);
 
   const OverView = [
     {
       Title: "Total Earning",
-      Amount: "$120",
+      Amount: `$${adminDashboardData.totalEarning}`,
       Icon: "https://cdn-icons-png.flaticon.com/512/5501/5501352.png",
     },
     {
       Title: "Completed Orders",
-      Amount: 220,
+      Amount: adminDashboardData.completedOrders,
       Icon: "https://cdn-icons-png.flaticon.com/128/1632/1632670.png",
     },
     {
       Title: "Total Customers",
-      Amount: 520,
+      Amount: `${adminDashboardData.totalCustomer}+`,
       Icon: "https://cdn-icons-png.flaticon.com/128/1379/1379505.png",
     },
     {
       Title: "Total Chefs",
-      Amount: 340,
+      Amount: adminDashboardData.totalChefs,
       Icon: "https://cdn-icons-png.flaticon.com/128/1830/1830878.png",
     },
   ];
-
 
   return (
     <Box
@@ -47,6 +49,7 @@ const DashboardAdmin = () => {
         }}
       >
         <Typography
+        component='span'
           sx={{
             fontSize: "24px",
             fontWeight: "700",
@@ -130,9 +133,8 @@ const DashboardAdmin = () => {
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: {xs: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)'},
-            gap: '8px',
-
+            gridTemplateColumns: { xs: "repeat(2, 1fr)", md: "repeat(3, 1fr)" },
+            gap: "8px",
           }}
         >
           {limitedProducts.length > 0 ? (
