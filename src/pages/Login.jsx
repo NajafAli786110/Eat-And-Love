@@ -1,13 +1,14 @@
 import { LoginOutlined } from "@mui/icons-material";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { showAlert } from "../features/reducers/AlertPopupReducer";
 import { login_user } from "../features/reducers/UserReducers";
 
 const Login = () => {
-  const UserData = useSelector((state) => state.users.UserData);
+
+  // Varibales / Assignment
   const loginStatus = useSelector((state) => state.users.loggedInStatus);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,6 +16,15 @@ const Login = () => {
     username: "",
     password: "",
   });
+
+  // Functionlities
+
+  // Edge Case || If logged in user come redirect it to dashboard
+  useEffect(()=>{
+    if (loginStatus.isLoggedIn) {
+      dispatch(showAlert({message: 'You are Already Logged In', type: 'success'}))
+    }
+  },[])
 
   const onChangeHandler = (e) => {
     setLoginData({
@@ -24,12 +34,6 @@ const Login = () => {
   };
 
   const LoginDataHandler = () => {
-    // const loggedInUser = UserData.find(
-    //   (item) =>
-    //     item.username === loginData.username &&
-    //     item.password === loginData.password
-    // );
-
     dispatch(
       login_user({
         username: loginData.username,

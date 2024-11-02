@@ -13,15 +13,26 @@ import {
   StockManagement,
   SuggestRecipe,
 } from "../components/dashboard/DashboardContent";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { showAlert } from "../features/reducers/AlertPopupReducer";
 
 const Dashboard = () => {
+  // Variables
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const loginStatus = useSelector((state) => state.users.loggedInStatus);
-  console.log(loginStatus.userRole);
-  
-  let userrole = "admin";
+  let userrole = loginStatus.userRole;
+
+  // Edge Case || If user jump to Dashboard without login as a guest so its redirect to login
+  useEffect(() => {
+    if (!loginStatus.isLoggedIn) {
+      dispatch(showAlert({message: 'Please Login First Then Comes to Dashboard', type: 'error'}))
+      navigate("/login");
+    }
+  }, []);
   let SidebarTabs = [];
+
   // Check The Current User
   switch (userrole) {
     case "admin":
@@ -32,15 +43,11 @@ const Dashboard = () => {
       SidebarTabs = SidebarPerUserRole.chef;
       break;
 
-    case "owner":
-      SidebarTabs = SidebarPerUserRole.owner;
-      break;
-
     case "user":
       SidebarTabs = SidebarPerUserRole.user;
   }
 
-  const [currData, setCurrData] = useState(SidebarTabs[0].activeComponent);
+  const [currData, setCurrData] = useState(SidebarTabs[0]?.activeComponent);
 
   switch (currData) {
     case "Chef_AttendanceHistory":
@@ -75,7 +82,7 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    setCurrData(SidebarTabs[0].activeComponent);
+    setCurrData(SidebarTabs[0]?.activeComponent);
   }, [userrole]);
 
   return (

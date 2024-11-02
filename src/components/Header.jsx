@@ -14,8 +14,11 @@ import {
 import { Search, ShoppingCart, Login, Menu } from "@mui/icons-material";
 import MobileMenuPopup from "./popups/MobileMenuPopup";
 import CartPopup from "./popups/CartPopup";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SearchBarPopup from "./popups/SearchBarPopup";
+import { IoMdArrowDropdown } from "react-icons/io";
+import { MdDashboard, MdLogout } from "react-icons/md";
+import { logout_user } from "../features/reducers/UserReducers";
 
 const pages = [
   { name: "Home", link: "/" },
@@ -25,14 +28,15 @@ const pages = [
 ];
 
 const Header = () => {
-  const CartData = useSelector((state)=> state.cart);
-  const loginStatus = useSelector((state)=> state.users.loggedInStatus);  
-  console.log(loginStatus.userRole);
-  
+  const CartData = useSelector((state) => state.cart);
+  const loginStatus = useSelector((state) => state.users.loggedInStatus);
   const locationTrack = useLocation();
   const [mblMenuOpen, setMblMenuOpen] = React.useState(false);
   const [isOpenSearch, setIsOpenSearch] = React.useState(false);
   const [isCartOpen, setIsCartOpen] = React.useState(false);
+  const [showDropdown, setShowDropdown] = React.useState(false);
+
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     setMblMenuOpen(false);
@@ -73,7 +77,7 @@ const Header = () => {
                   display: "flex",
                   justifyContent: "end",
                   alignItems: "center",
-                  gap: {xs: "8px", md: "20px"},
+                  gap: { xs: "8px", md: "20px" },
                 }}
               >
                 {/* Navigation List */}
@@ -111,11 +115,21 @@ const Header = () => {
                 </List>
 
                 {/* Icons */}
-                <Box sx={{ display: "flex", gap: "8px", alignItems: "center", justifyContent: 'end' }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: "8px",
+                    alignItems: "center",
+                    justifyContent: "end",
+                  }}
+                >
                   {/* Search Icon */}
                   <Button
                     onClick={() => setIsOpenSearch(true)}
-                    sx={{ minWidth: { xs: "18px", sm: "25px" }, padding: '0px' }}
+                    sx={{
+                      minWidth: { xs: "18px", sm: "25px" },
+                      padding: "0px",
+                    }}
                   >
                     <Search
                       sx={{
@@ -126,12 +140,12 @@ const Header = () => {
                   </Button>
 
                   {/* Cart Icon */}
-                  <Box sx={{ mb: {xs: "0px", md: "-5px"} }}>
+                  <Box sx={{ mb: { xs: "0px", md: "-5px" } }}>
                     <Button
                       sx={{
                         minWidth: { xs: "18px", sm: "25px" },
                         position: "relative",
-                        padding: '0px'
+                        padding: "0px",
                       }}
                       onClick={() => setIsCartOpen(true)}
                     >
@@ -175,28 +189,101 @@ const Header = () => {
                   </Button>
                 </Box>
 
-                <Link
-                  to="/login"
-                  style={{
-                    textDecoration: "none",
-                  }}
-                >
-                  <Button
-                    variant="contained"
-                    startIcon={<Login sx={{
-                      fontSize: {xs: '8px', md: '16px'},
-                    }} />}
-                    sx={{
-                      backgroundColor: "var(--secondary-color)",
-                      borderRadius: "100px",
-                      textTransform: "capitalize",
-                      padding: {xs: '4px 12px', md: '8px 16px'},
-                      fontSize: {xs: '12px', md: '16px'},
+                {/* Login OR Dashboard Button */}
+                {loginStatus.isLoggedIn ? (
+                  <Box position="relative">
+                    <Button
+                      onClick={() => setShowDropdown((prev) => !prev)}
+                      variant="contained"
+                      color="primary"
+                      endIcon={<IoMdArrowDropdown />}
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        fontSize: {xs: '12px', md: '16px'},
+                        bgcolor: "secondary.main",
+                        "&:hover": { bgcolor: "primary.main" },
+                        transition: "0.3s",
+                        borderRadius: "100px",
+                      }}
+                    >
+                      Menu
+                    </Button>
+
+                    {showDropdown && (
+                      <Box
+                        display="flex"
+                        flexDirection="column"
+                        position="absolute"
+                        top="100%"
+                        left={0}
+                        bgcolor="white"
+                        boxShadow={2}
+                        mt={1}
+                        borderRadius={1}
+                        overflow="hidden"
+                        zIndex={999}
+                        padding="3px"
+                      >
+
+                        {/* Dashboard Button */}
+                        <Link to='/dashboard'>
+                          <Button
+                            startIcon={<MdDashboard />}
+                            onClick={() => console.log("Dashboard")}
+                            sx={{
+                              justifyContent: "flex-start",
+                              color: "primary.main",
+                              fontSize: {xs: "10px", md: "14px"},
+                            }}
+                          >
+                            Dashboard
+                          </Button>
+                        </Link>
+
+                        {/* Logout Button */}
+                        <Button
+                          startIcon={<MdLogout />}
+                          onClick={()=> dispatch(logout_user())}
+                          sx={{
+                            justifyContent: "flex-start",
+                            color: "primary.main",
+                            fontSize: {xs: "10px", md: "14px"},
+                          }}
+                        >
+                          Logout
+                        </Button>
+                      </Box>
+                    )}
+                  </Box>
+                ) : (
+                  <Link
+                    to="/login"
+                    style={{
+                      textDecoration: "none",
                     }}
                   >
-                    Login
-                  </Button>
-                </Link>
+                    <Button
+                      variant="contained"
+                      startIcon={
+                        <Login
+                          sx={{
+                            fontSize: { xs: "8px", md: "16px" },
+                          }}
+                        />
+                      }
+                      sx={{
+                        backgroundColor: "var(--secondary-color)",
+                        borderRadius: "100px",
+                        textTransform: "capitalize",
+                        padding: { xs: "4px 12px", md: "8px 16px" },
+                        fontSize: { xs: "12px", md: "16px" },
+                      }}
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                )}
               </Box>
             </Box>
           </Toolbar>

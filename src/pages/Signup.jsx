@@ -20,6 +20,7 @@ const Signup = () => {
   const UserData = useSelector((state) => state.users.UserData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [signUpData, setSignUpData] = useState({
     fullName: "",
     username: "",
