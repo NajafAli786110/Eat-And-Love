@@ -3,7 +3,6 @@ export const SidebarPerUserRole = {
       { text: "Dashboard", icon: "DashboardCustomize", activeComponent: "Admin_Dashboard" },
       { text: "Order Management", icon: "<ListAltIcon />", activeComponent: "Admin_OrderManagement" },
       { text: "Add Inventory", icon: "<InventoryIcon />", activeComponent: "AddInventory" },
-      { text: "Hotel Management", icon: "<RestaurantIcon />", activeComponent: "Admin_HotelManagement" },
       { text: "Chef Management", icon: "<PeopleIcon />", activeComponent: "Admin_ChefManagement" },
       { text: "Profile", icon: "<AccountBoxIcon />", activeComponent: "Profile" },
     ],

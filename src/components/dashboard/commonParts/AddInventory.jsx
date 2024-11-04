@@ -1,23 +1,46 @@
 import React, { useState } from "react";
 import { Box, TextField, Button, Typography, Container } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { add_product } from "../../../features/reducers/ProductReducer";
 
 const AddInventory = () => {
+  const dispatch = useDispatch();
   const [productData, setProductData] = useState({
-    id: "",
     name: "",
     description: "",
     imageUrl: "",
     category: "",
-    price: "",
+    price: 0,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProductData({ ...productData, [name]: value });
+    setProductData({
+      ...productData,
+      [name]: name === "price" ? parseInt(value, 10) : value,
+    });
   };
 
   const handleAddProduct = () => {
     console.log("Product added:", productData);
+    dispatch(
+      add_product({
+        name: productData.name,
+        description: productData.description,
+        imageUrl: productData.imageUrl,
+        category: productData.imageUrl,
+        price: productData.price,
+      })
+    );
+    console.log(typeof productData.price);
+
+    setProductData({
+      name: "",
+      description: "",
+      imageUrl: "",
+      category: "",
+      price: 0,
+    });
   };
 
   return (
@@ -38,14 +61,6 @@ const AddInventory = () => {
           gap: "16px",
         }}
       >
-        <TextField
-          label="Product ID"
-          name="id"
-          value={productData.id}
-          onChange={handleChange}
-          variant="outlined"
-          fullWidth
-        />
         <TextField
           label="Product Name"
           name="name"

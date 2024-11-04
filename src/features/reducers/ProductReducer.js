@@ -10,10 +10,7 @@ const ProductReducer = createSlice({
     add_product: (state, action) => {
       const newItem = {
         id: Math.random(),
-        name: action.payload.name,
-        description: action.payload.description,
-        imageUrl: action.payload.imageUrl,
-        category: action.payload.category,
+        ...action.payload,
       };
       state.push(newItem);
     },

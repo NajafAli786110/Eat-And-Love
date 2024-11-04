@@ -11,7 +11,7 @@ import {
 import { IoBagCheckOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addAmount } from "../features/reducers/dashboardActions/AdminReducer";
+import { addAmount, new_order } from "../features/reducers/dashboardActions/AdminReducer";
 import { empty_cart } from "../features/reducers/CartReducer";
 import { useNavigate } from "react-router-dom";
 import { showAlert } from "../features/reducers/AlertPopupReducer";
@@ -49,6 +49,8 @@ const Checkout = () => {
       dispatch(showAlert({message: 'Put your favorites in your Bag', type: 'success'}));
     }
   },[])
+
+
   // onChange Handler
   const onChangeHandler = (e) => {
     setCheckoutData({
@@ -59,6 +61,10 @@ const Checkout = () => {
 
   const onSubmitHandler = () => {
     console.log(checkoutData);
+    dispatch(new_order({
+      customer: checkoutData.fullName,
+      total: totalPrice,
+    }))
     dispatch(addAmount({ totalEarning: totalPrice }));
     dispatch(empty_cart());
     totalPrice = 0;

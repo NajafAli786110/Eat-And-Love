@@ -53,7 +53,7 @@ const Login = () => {
 
       // 1.2 sec baad navigate karwao
       setTimeout(() => {
-        navigate("/");
+        navigate("/dashboard");
       }, 1200);
 
       // Form ko Blank Karo (Edge Case)

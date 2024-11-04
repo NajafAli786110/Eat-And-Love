@@ -6,7 +6,6 @@ import {
   AddInventory,
   ChefManagement,
   DashboardAdmin,
-  HotelManagement,
   OrderHistory,
   OrderManagement,
   Profile,
@@ -23,6 +22,8 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const loginStatus = useSelector((state) => state.users.loggedInStatus);
   let userrole = loginStatus.userRole;
+  let currentUserDetails = loginStatus?.currentUser;
+  
 
   // Edge Case || If user jump to Dashboard without login as a guest so its redirect to login
   // useEffect(() => {
@@ -61,9 +62,6 @@ const Dashboard = () => {
       break;
     case "Admin_Dashboard":
       setCurrData(<DashboardAdmin />);
-      break;
-    case "Admin_HotelManagement":
-      setCurrData(<HotelManagement />);
       break;
     case "User_OrderHistory":
       setCurrData(<OrderHistory />);
@@ -223,7 +221,7 @@ const Dashboard = () => {
                     fontSize: { xs: "10px", md: "12px" },
                   }}
                 >
-                  Lila
+                  {currentUserDetails.name}
                 </Typography>
                 <Typography
                   sx={{
@@ -231,7 +229,7 @@ const Dashboard = () => {
                     color: "#00000070",
                   }}
                 >
-                  Lila@gmail.com
+                  {currentUserDetails.email}
                 </Typography>
               </Box>
             </Box>

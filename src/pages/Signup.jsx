@@ -15,9 +15,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { add_user } from "../features/reducers/UserReducers";
 import { showAlert } from "../features/reducers/AlertPopupReducer";
+import {
+  new_chef_added,
+  new_user_added,
+} from "../features/reducers/dashboardActions/AdminReducer";
 
 const Signup = () => {
-  const UserData = useSelector((state) => state.users.UserData);
+  const UserData = useSelector((state) => state.users.userData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -74,6 +78,14 @@ const Signup = () => {
         password: signUpData.password,
       })
     );
+
+    // Increase Number of Customers
+    dispatch(new_user_added());
+
+    if (signUpData.userRole === "chef") {
+      // Increase Number of Chefs
+      dispatch(new_chef_added());
+    }
 
     // Sucees message Show karwao
     dispatch(

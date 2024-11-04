@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -11,45 +11,12 @@ import {
   Paper,
   Button,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { changed_status } from "../../../features/reducers/dashboardActions/AdminReducer";
 
 const OrderManagement = () => {
-  const orders = [
-    {
-      id: "001",
-      customer: "Alice Johnson",
-      date: "2024-10-25",
-      status: "Pending",
-      total: "$120",
-    },
-    {
-      id: "002",
-      customer: "Bob Smith",
-      date: "2024-10-24",
-      status: "Shipped",
-      total: "$85",
-    },
-    {
-      id: "003",
-      customer: "Charlie Davis",
-      date: "2024-10-23",
-      status: "Pending",
-      total: "$100",
-    },
-    {
-      id: "004",
-      customer: "Dana Lee",
-      date: "2024-10-22",
-      status: "Delivered",
-      total: "$200",
-    },
-    {
-      id: "005",
-      customer: "Eve Thompson",
-      date: "2024-10-21",
-      status: "Shipped",
-      total: "$150",
-    },
-  ];
+  // Initialization
+  const orders = useSelector((state) => state.adminReducer.orders);
   const labelsTop = [
     {
       label: "Order ID",
@@ -71,21 +38,24 @@ const OrderManagement = () => {
       label: "Actions",
     },
   ];
+  const [showDropdown, setShowDropdown] = useState(null);
+  const dispatch = useDispatch();
 
   return (
     <Box sx={{ padding: "24px 0px" }}>
-
       <TableContainer component={Paper} sx={{ borderRadius: "16px" }}>
         <Table>
           <TableHead sx={{ backgroundColor: "#f0f0f0" }}>
             <TableRow>
               {labelsTop.map((item, index) => (
                 <TableCell key={index}>
-                  <Typography sx={{
-                    fontSize: '16px',
-                    fontWeight: '600',
-                    letterSpacing: '-0.8px'
-                  }}>
+                  <Typography
+                    sx={{
+                      fontSize: "16px",
+                      fontWeight: "600",
+                      letterSpacing: "-0.8px",
+                    }}
+                  >
                     {item.label}
                   </Typography>
                 </TableCell>
@@ -116,17 +86,74 @@ const OrderManagement = () => {
                 </TableCell>
                 <TableCell>{order.total}</TableCell>
                 <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    sx={{ marginRight: "8px" }}
-                  >
-                    View Details
-                  </Button>
-                  <Button variant="outlined" color="secondary" size="small">
-                    Mark as Shipped
-                  </Button>
+                  <Box sx={{ position: "relative" }}>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      size="small"
+                      onClick={() =>
+                        setShowDropdown((prevId) =>
+                          prevId === order.id ? null : order.id
+                        )
+                      }
+                    >
+                      Changed Status
+                    </Button>
+                    {showDropdown === order.id && (
+                      <Box
+                        display="flex"
+                        flexDirection="column"
+                        position='absolute'
+                        top="100%"
+                        left={0}
+                        bgcolor="white"
+                        boxShadow={2}
+                        mt={1}
+                        borderRadius={1}
+                        overflow="hidden"
+                        zIndex={999}
+                        padding="3px"
+                      >
+                        {/* Mark As Shipped */}
+                        <Button
+                          sx={{
+                            justifyContent: "flex-start",
+                            color: "primary.main",
+                            fontSize: { xs: "10px", md: "14px" },
+                          }}
+                          onClick={() =>
+                            dispatch(
+                              changed_status({
+                                id: order.id,
+                                status: "Shipped",
+                              })
+                            )
+                          }
+                        >
+                          Mark As Shipped
+                        </Button>
+
+                        {/* Mark as Delivered */}
+                        <Button
+                          sx={{
+                            justifyContent: "flex-start",
+                            color: "primary.main",
+                            fontSize: { xs: "10px", md: "14px" },
+                          }}
+                          onClick={() =>
+                            dispatch(
+                              changed_status({
+                                id: order.id,
+                                status: "Delivered",
+                              })
+                            )
+                          }
+                        >
+                          Mark As Delivered
+                        </Button>
+                      </Box>
+                    )}
+                  </Box>
                 </TableCell>
               </TableRow>
             ))}
