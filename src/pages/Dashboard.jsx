@@ -21,17 +21,26 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginStatus = useSelector((state) => state.users.loggedInStatus);
-  let userrole = loginStatus.userRole;
-  let currentUserDetails = loginStatus?.currentUser;
-  
-
   // Edge Case || If user jump to Dashboard without login as a guest so its redirect to login
-  // useEffect(() => {
-  //   if (!loginStatus.isLoggedIn) {
-  //     dispatch(showAlert({message: 'Please Login First Then Comes to Dashboard', type: 'error'}))
-  //     navigate("/login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!loginStatus.isLoggedIn) {
+      dispatch(
+        showAlert({
+          message: "Please Login First Then Comes to Dashboard",
+          type: "error",
+        })
+      );
+      navigate("/login");
+    }
+  }, []);
+  let userrole = loginStatus.userRole;
+  let currentUserDetails = loginStatus.isLoggedIn
+    ? loginStatus.currentUser
+    : {
+      name: '',
+      email: '',
+    };
+
   let SidebarTabs = [];
 
   // Check The Current User

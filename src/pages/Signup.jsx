@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { add_user } from "../features/reducers/UserReducers";
 import { showAlert } from "../features/reducers/AlertPopupReducer";
 import {
+  new_chef,
   new_chef_added,
   new_user_added,
 } from "../features/reducers/dashboardActions/AdminReducer";
@@ -69,6 +70,7 @@ const Signup = () => {
   // onSignUpHandler
   const onSignUpHandler = () => {
     // Give to Globals State
+
     dispatch(
       add_user({
         name: signUpData.fullName,

@@ -44,10 +44,23 @@ const initialStates = {
       total: "$150",
     },
   ],
+  chef: [
+    {
+      id: 1,
+      name: "Chef Alex",
+      email: "alex@example.com",
+    },
+    {
+      id: 2,
+      name: "Chef Maria",
+      email: "maria@example.com",
+    },
+  ],
 };
 
 // Variables
 const orderNumber = 5;
+const chefNumber = 2;
 const AdminReducer = createSlice({
   name: "Admin Reducer",
   initialState: initialStates,
@@ -80,9 +93,26 @@ const AdminReducer = createSlice({
         }
       });
     },
+    new_chef: (state, action) => {
+      const newChef = {
+        id: chefNumber + 1,
+        ...action.payload,
+      };
+      state.chef.push(newChef);
+    },
+    remove_chef: (state, action) => {
+      state.chef = state.chef.filter((chef) => chef.id !== action.payload.id);
+    },
   },
 });
 
-export const { addAmount, new_user_added, new_chef_added, new_order, changed_status } =
-  AdminReducer.actions;
+export const {
+  addAmount,
+  new_user_added,
+  new_chef_added,
+  new_order,
+  changed_status,
+  new_chef,
+  remove_chef,
+} = AdminReducer.actions;
 export default AdminReducer.reducer;

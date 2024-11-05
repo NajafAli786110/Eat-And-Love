@@ -16,24 +16,12 @@ import {
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useDispatch, useSelector } from "react-redux";
+import { remove_chef } from "../../../features/reducers/dashboardActions/AdminReducer";
 
 const ChefManagement = () => {
-  const demoChefs = [
-    {
-      id: 1,
-      name: "Chef Alex",
-      specialty: "Italian Cuisine",
-      email: "alex@example.com",
-      imageUrl: "https://via.placeholder.com/60",
-    },
-    {
-      id: 2,
-      name: "Chef Maria",
-      specialty: "French Pastry",
-      email: "maria@example.com",
-      imageUrl: "https://via.placeholder.com/60",
-    },
-  ];
+  const demoChefs = useSelector((state) => state.adminReducer.chef);
+  const dispatch = useDispatch();
 
   return (
     <Box sx={{ marginTop: "32px" }}>
@@ -44,9 +32,8 @@ const ChefManagement = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="center">Profile</TableCell>
+              <TableCell align="left">Order No.</TableCell>
               <TableCell align="center">Chef Name</TableCell>
-              <TableCell align="center">Specialty</TableCell>
               <TableCell align="center">Email</TableCell>
               <TableCell align="center">Actions</TableCell>
             </TableRow>
@@ -54,20 +41,14 @@ const ChefManagement = () => {
           <TableBody>
             {demoChefs.map((chef) => (
               <TableRow key={chef.id}>
-                <TableCell align="center">
-                  <Avatar src={chef.imageUrl} alt={chef.name} />
-                </TableCell>
+                <TableCell align="left">{chef.id}</TableCell>
                 <TableCell align="center">{chef.name}</TableCell>
-                <TableCell align="center">{chef.specialty}</TableCell>
                 <TableCell align="center">{chef.email}</TableCell>
                 <TableCell align="center">
-                  <IconButton color="success">
-                    <CheckCircleIcon />
-                  </IconButton>
-                  <IconButton color="warning">
-                    <CancelIcon />
-                  </IconButton>
-                  <IconButton color="error">
+                  <IconButton
+                    color="error"
+                    onClick={() => dispatch(remove_chef({ id: chef.id }))}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
